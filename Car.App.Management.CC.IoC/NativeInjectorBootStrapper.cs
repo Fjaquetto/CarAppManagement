@@ -14,7 +14,7 @@ namespace Car.App.Management.CC.IoC
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
 
             // Infra - Identity
-            //services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }

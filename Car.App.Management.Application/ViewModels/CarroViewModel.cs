@@ -28,23 +28,23 @@ namespace Car.App.Management.Application.ViewModels
         public DateTime Ano { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar a placa do carro.")]
-        [MinLength(13)]
-        [MaxLength(13)]
+        [MinLength(8)]
+        [MaxLength(8)]
         [DisplayName("Placa")]
         public string Placa { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar uma descrição para o carro.")]
-        [MinLength(13)]
-        [MaxLength(13)]
+        [MinLength(2)]
+        [MaxLength(100)]
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar o valor de compra do carro.")]
-        [RegularExpression(@"^\d+\.\d{0,2}$")]
+        //[RegularExpression(@"^\d+\.\d{0,2}$")]
         [DisplayName("Valor de Compra")]
         public decimal ValorComprado { get; set; }
 
-        [RegularExpression(@"^\d+\.\d{0,2}$")]
+        //[RegularExpression(@"^\d+\.\d{0,2}$")]
         [DisplayName("Valor de Venda")]
         public decimal? ValorVenda { get; set; }
 

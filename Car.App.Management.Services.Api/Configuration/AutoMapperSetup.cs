@@ -11,7 +11,7 @@ namespace Car.App.Management.Services.Api.Configuration
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapperConfig));
         }
     }
 }

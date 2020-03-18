@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Car.App.Management.Application\Car.App.Management.Application.csproj" />
     <ProjectReference Include="..\Car.App.Management.CC.Identity\Car.App.Management.CC.Identity.csproj" />
     <ProjectReference Include="..\Car.App.Management.Domain\Car.App.Management.Domain.csproj" />
     <ProjectReference Include="..\Car.App.Management.Infra.Data\Car.App.Management.Infra.Data.csproj" />

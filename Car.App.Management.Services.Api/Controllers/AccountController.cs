@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace Car.App.Management.Services.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AccountController : ApiController
     {
         private readonly SignInManager<IdentityUser> _signInManager;

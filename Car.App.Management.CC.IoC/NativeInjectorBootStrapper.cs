@@ -1,7 +1,10 @@
-﻿using Car.App.Management.CC.Identity.Authorization;
+﻿using Car.App.Management.Application.Interfaces;
+using Car.App.Management.Application.Services;
+using Car.App.Management.CC.Identity.Authorization;
 using Car.App.Management.CC.Identity.Models;
 using Car.App.Management.Domain.Interfaces;
 using Car.App.Management.Infra.Data.Context;
+using Car.App.Management.Infra.Data.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +17,11 @@ namespace Car.App.Management.CC.IoC
             // ASP.NET Authorization Polices
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
 
+            // Application
+            services.AddScoped<ICarroAppService, CarroAppService>();
+
             // Infra - Data
+            services.AddScoped<ICarroRepository, CarroRepository>();
             services.AddScoped<CarAppContext>();
 
             // Infra - Identity

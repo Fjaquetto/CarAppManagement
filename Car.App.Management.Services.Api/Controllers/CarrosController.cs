@@ -1,5 +1,6 @@
 ﻿using Car.App.Management.Application.Interfaces;
 using Car.App.Management.Application.ViewModels;
+using Car.App.Management.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,7 +15,8 @@ namespace Car.App.Management.Services.Api.Controllers
     {
         private readonly ICarroAppService _carroAppService;
 
-        public CarrosController(ICarroAppService carroAppService)
+        public CarrosController(ICarroAppService carroAppService,
+                                IUser user) : base(user)
         {
             _carroAppService = carroAppService;
         }
@@ -27,7 +29,7 @@ namespace Car.App.Management.Services.Api.Controllers
                 return BadRequest(new
                 {
                     success = false,
-                    errors = "Modelo de entrada inválido."
+                    errors = ModelState
                 });
             }
 
@@ -36,7 +38,6 @@ namespace Car.App.Management.Services.Api.Controllers
             return Ok(carroViewModel);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<List<CarroViewModel>> Get()
         {

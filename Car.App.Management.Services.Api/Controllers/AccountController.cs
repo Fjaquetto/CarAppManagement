@@ -1,4 +1,5 @@
 ﻿using Car.App.Management.CC.Identity.Models;
+using Car.App.Management.Domain.Interfaces;
 using Car.App.Management.Services.Api.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,8 @@ namespace Car.App.Management.Services.Api.Controllers
         public AccountController(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IUser user) : base(user)
         {
             _userManager = userManager;
             _signInManager = signInManager;

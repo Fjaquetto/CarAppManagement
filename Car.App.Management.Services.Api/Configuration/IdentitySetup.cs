@@ -1,4 +1,5 @@
 ﻿using Car.App.Management.CC.Identity.Authorization;
+using Car.App.Management.CC.Identity.Extensions;
 using Car.App.Management.CC.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,7 @@ namespace Car.App.Management.Services.Api.Configuration
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<IdentityMensagensPortugues>()
                 .AddDefaultTokenProviders();
 
             // JWT Setup

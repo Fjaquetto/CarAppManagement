@@ -1,5 +1,6 @@
 ﻿using Car.App.Management.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -13,6 +14,11 @@ namespace Car.App.Management.CC.Identity.Models
         public AspNetUser(IHttpContextAccessor accessor)
         {
             _accessor = accessor;
+        }
+
+        public Guid GetUserId()
+        {
+            return IsAuthenticated() ? Guid.Parse(_accessor.HttpContext.User.GetUserId()) : Guid.Empty;
         }
 
         public string Name => GetName();
@@ -31,6 +37,20 @@ namespace Car.App.Management.CC.Identity.Models
         public IEnumerable<Claim> GetClaimsIdentity()
         {
             return _accessor.HttpContext.User.Claims;
+        }
+    }
+
+    public static class ClaimsPrincipalExtensions
+    {
+        public static string GetUserId(this ClaimsPrincipal principal)
+        {
+            if (principal == null)
+            {
+                throw new ArgumentException(nameof(principal));
+            }
+
+            var claim = principal.FindFirst(ClaimTypes.NameIdentifier);
+            return claim?.Value;
         }
     }
 }

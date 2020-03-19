@@ -28,8 +28,8 @@ namespace Car.App.Management.Application.ViewModels
         public DateTime Ano { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar a placa do carro.")]
-        [MinLength(8)]
-        [MaxLength(8)]
+        [MinLength(8, ErrorMessage = "É necessário que o campo contenha 8 caracteres.")]
+        [MaxLength(8, ErrorMessage ="É necessário que o campo contenha 8 caracteres.")]
         [DisplayName("Placa")]
         public string Placa { get; set; }
 

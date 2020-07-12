@@ -7,6 +7,8 @@ namespace Car.App.Management.Domain.Models
     public class Carro
     {
         public int Id { get; set; }
+        public int ClienteId { get; set; }
+
         public string Modelo { get; set; }
         public string Cor { get; set; }
         public DateTime Ano { get; set; }
@@ -18,8 +20,6 @@ namespace Car.App.Management.Domain.Models
         public DateTime? DataVenda { get; set; }
         public bool IpvaPago { get; set; }
         public bool Vendido { get; set; }
-
-        public int ClienteId { get; set; }
 
         /* EF Relations */
         public Cliente Cliente { get; set; }

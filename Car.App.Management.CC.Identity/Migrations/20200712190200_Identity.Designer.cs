@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Car.App.Management.CC.Identity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200316142037_Identity")]
+    [Migration("20200712190200_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

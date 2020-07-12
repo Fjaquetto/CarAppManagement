@@ -15,6 +15,8 @@ namespace Car.App.Management.Domain.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
 
+        public int ClienteId { get; set; }
+
         /* EF Relation */
         public Cliente Cliente { get; set; }
     }

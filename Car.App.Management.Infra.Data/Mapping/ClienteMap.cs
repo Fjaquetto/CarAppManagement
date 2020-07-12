@@ -1,6 +1,7 @@
 ﻿using Car.App.Management.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
 
 namespace Car.App.Management.Infra.Data.Mapping
 {
@@ -28,7 +29,8 @@ namespace Car.App.Management.Infra.Data.Mapping
 
             // 1 : 1 => Cliente : Endereco
             builder.HasOne(x => x.Endereco)
-                .WithOne(x => x.Cliente);
+                .WithOne(x => x.Cliente)
+                .HasForeignKey<Endereco>(x => x.ClienteId);
 
             // 1 : N => Cliente : Carro
             builder.HasMany(x => x.Carros)

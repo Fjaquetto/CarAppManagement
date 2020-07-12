@@ -14,6 +14,6 @@ namespace Car.App.Management.Domain.Models
         public Endereco Endereco { get; set; }
 
         /* EF Relations */
-        public IEnumerable<Carro> Carros { get; set; }
+        public ICollection<Carro> Carros { get; set; }
     }
 }

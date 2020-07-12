@@ -11,6 +11,5 @@ namespace Car.App.Management.Infra.Data.Repository
         {
 
         }
-
     }
 }

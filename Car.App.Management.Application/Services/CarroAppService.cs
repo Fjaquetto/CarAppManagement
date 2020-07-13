@@ -42,6 +42,12 @@ namespace Car.App.Management.Application.Services
             await _carroRepository.Remover(id);
             return true;
         }
+
+        public async Task<CarroViewModel> ObterPorId(int id)
+        {
+            return _mapper.Map<CarroViewModel>(await _carroRepository.ObterPorId(id));
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

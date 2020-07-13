@@ -46,5 +46,17 @@ namespace Car.App.Management.Services.Api.Controllers
         {
             return await _clienteAppService.ObterTodos();
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ClienteViewModel> Get(int id)
+        {
+            return await _clienteAppService.ObterPorId(id);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<bool> Delete(int id)
+        {
+            return await _clienteAppService.Remover(id);
+        }
     }
 }

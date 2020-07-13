@@ -43,5 +43,17 @@ namespace Car.App.Management.Services.Api.Controllers
         {
             return await _carroAppService.ObterTodos();
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<CarroViewModel> Get(int id)
+        {
+            return await _carroAppService.ObterPorId(id);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<bool> Delete(int id)
+        {
+            return await _carroAppService.Remover(id);
+        }
     }
 }

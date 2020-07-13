@@ -11,6 +11,7 @@ namespace Car.App.Management.Application.Interfaces
         Task<bool> Adicionar(ClienteViewModel carroViewModel);
         Task<bool> Atualizar(ClienteViewModel carro);
         Task<bool> Remover(int id);
+        Task<ClienteViewModel> ObterPorId(int id);
         Task<List<ClienteViewModel>> ObterTodos();
     }
 }

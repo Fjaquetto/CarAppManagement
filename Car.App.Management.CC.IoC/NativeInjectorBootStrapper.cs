@@ -19,9 +19,12 @@ namespace Car.App.Management.CC.IoC
 
             // Application
             services.AddScoped<ICarroAppService, CarroAppService>();
+            services.AddScoped<IClienteAppService, ClienteAppService>();
 
             // Infra - Data
             services.AddScoped<ICarroRepository, CarroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<CarAppContext>();
 
             // Infra - Identity

@@ -9,6 +9,8 @@ namespace Car.App.Management.Application.AutoMapper
         public AutoMapperConfig()
         {
             CreateMap<Carro, CarroViewModel>().ReverseMap();
+            CreateMap<Cliente, ClienteViewModel>().ForMember(x => x.EnderecoViewModel, o => o.MapFrom(s => s.Endereco)).ReverseMap();
+            CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
         }
     }
 }

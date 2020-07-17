@@ -25,12 +25,13 @@ namespace Car.App.Management.Application.Services
 
         public async Task<List<ClienteViewModel>> ObterTodos()
         {
-            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.ObterTodos());
+            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.ObterTodosClientes());
         }
         public async Task<bool> Adicionar(ClienteViewModel clienteViewModel)
         {
-            await _clienteRepository.Adicionar(_mapper.Map<Cliente>(clienteViewModel));
-            //await _enderecoRepository.Adicionar(_mapper.Map<Endereco>(enderecoViewModel));
+            clienteViewModel.EnderecoViewModel.ClienteId = await _clienteRepository.AdicionarClienteEndereco(_mapper.Map<Cliente>(clienteViewModel));
+
+            await _enderecoRepository.Adicionar(_mapper.Map<Endereco>(clienteViewModel.EnderecoViewModel));
             return true;
         }
 

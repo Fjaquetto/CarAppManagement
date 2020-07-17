@@ -9,6 +9,26 @@ namespace Car.App.Management.Application.ViewModels
         [Key]
         public int Id { get; set; }
 
+        private int _clienteIdSemVenda = 1;
+
+        public int ClienteId { 
+            get 
+            {
+                return ClienteId;
+            }            
+            set 
+            {
+                if (value == 0)
+                {
+                    ClienteId = _clienteIdSemVenda;
+                }
+                else
+                {
+                    ClienteId = value;
+                }
+            }
+        }
+
         [Required(ErrorMessage = "É necessário especificar o modelo do carro.")]
         [MinLength(2)]
         [MaxLength(100)]
@@ -29,7 +49,7 @@ namespace Car.App.Management.Application.ViewModels
 
         [Required(ErrorMessage = "É necessário especificar a placa do carro.")]
         [MinLength(8, ErrorMessage = "É necessário que o campo contenha 8 caracteres.")]
-        [MaxLength(8, ErrorMessage ="É necessário que o campo contenha 8 caracteres.")]
+        [MaxLength(8, ErrorMessage = "É necessário que o campo contenha 8 caracteres.")]
         [DisplayName("Placa")]
         public string Placa { get; set; }
 

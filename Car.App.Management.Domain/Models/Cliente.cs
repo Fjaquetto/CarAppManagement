@@ -7,6 +7,7 @@ namespace Car.App.Management.Domain.Models
     public class Cliente
     {
         public int Id { get; set; }
+        public int VendedorId { get; set; }
         public string Nome { get; set; }
         public DateTime Nascimento { get; set; }
         public string Telefone { get; set; }
@@ -15,5 +16,6 @@ namespace Car.App.Management.Domain.Models
 
         /* EF Relations */
         public ICollection<Carro> Carros { get; set; }
+        public Vendedor Vendedor { get; set; }
     }
 }

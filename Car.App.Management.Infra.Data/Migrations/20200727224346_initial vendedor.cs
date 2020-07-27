@@ -3,16 +3,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Car.App.Management.Infra.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initialvendedor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Vendedores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
+                    ValorVendido = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ComissaoMesAtual = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vendedores", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Clientes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    VendedorId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(type: "varchar(200)", nullable: false),
                     Nascimento = table.Column<DateTime>(type: "datetime", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(14)", nullable: false),
@@ -21,6 +37,12 @@ namespace Car.App.Management.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clientes_Vendedores_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,6 +52,7 @@ namespace Car.App.Management.Infra.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClienteId = table.Column<int>(nullable: false),
+                    VendedorId = table.Column<int>(nullable: true),
                     Modelo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Cor = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Ano = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -51,6 +74,12 @@ namespace Car.App.Management.Infra.Data.Migrations
                         principalTable: "Clientes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Carros_Vendedores_VendedorId",
+                        column: x => x.VendedorId,
+                        principalTable: "Vendedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +114,16 @@ namespace Car.App.Management.Infra.Data.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Carros_VendedorId",
+                table: "Carros",
+                column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clientes_VendedorId",
+                table: "Clientes",
+                column: "VendedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Enderecos_ClienteId",
                 table: "Enderecos",
                 column: "ClienteId",
@@ -101,6 +140,9 @@ namespace Car.App.Management.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Vendedores");
         }
     }
 }

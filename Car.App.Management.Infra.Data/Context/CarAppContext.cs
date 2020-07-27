@@ -11,6 +11,7 @@ namespace Car.App.Management.Infra.Data.Context
         public DbSet<Carro> Carros { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Vendedor> Vendedores { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,6 +19,7 @@ namespace Car.App.Management.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new CarroMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new VendedorMap());
 
             base.OnModelCreating(modelBuilder);
         }

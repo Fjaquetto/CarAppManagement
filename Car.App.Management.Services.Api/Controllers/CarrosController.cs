@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Car.App.Management.Services.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("api/veiculos")]
     public class CarrosController : ApiController
     {

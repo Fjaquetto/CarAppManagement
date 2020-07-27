@@ -9,25 +9,7 @@ namespace Car.App.Management.Application.ViewModels
         [Key]
         public int Id { get; set; }
 
-        private int _clienteIdSemVenda = 1;
-
-        public int ClienteId { 
-            get 
-            {
-                return ClienteId;
-            }            
-            set 
-            {
-                if (value == 0)
-                {
-                    ClienteId = _clienteIdSemVenda;
-                }
-                else
-                {
-                    ClienteId = value;
-                }
-            }
-        }
+        public int ClienteId { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar o modelo do carro.")]
         [MinLength(2)]

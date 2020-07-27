@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Car.App.Management.Infra.Data.Migrations
 {
     [DbContext(typeof(CarAppContext))]
-    [Migration("20200712190315_Initial")]
-    partial class Initial
+    [Migration("20200727224346_initial vendedor")]
+    partial class initialvendedor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,12 +69,17 @@ namespace Car.App.Management.Infra.Data.Migrations
                     b.Property<decimal?>("ValorVenda")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("VendedorId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Vendido")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Carros");
                 });
@@ -101,7 +106,12 @@ namespace Car.App.Management.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Clientes");
                 });
@@ -151,11 +161,47 @@ namespace Car.App.Management.Infra.Data.Migrations
                     b.ToTable("Enderecos");
                 });
 
+            modelBuilder.Entity("Car.App.Management.Domain.Models.Vendedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("ComissaoMesAtual")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<decimal>("ValorVendido")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vendedores");
+                });
+
             modelBuilder.Entity("Car.App.Management.Domain.Models.Carro", b =>
                 {
                     b.HasOne("Car.App.Management.Domain.Models.Cliente", "Cliente")
                         .WithMany("Carros")
                         .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Car.App.Management.Domain.Models.Vendedor", "Vendedor")
+                        .WithMany("Carros")
+                        .HasForeignKey("VendedorId");
+                });
+
+            modelBuilder.Entity("Car.App.Management.Domain.Models.Cliente", b =>
+                {
+                    b.HasOne("Car.App.Management.Domain.Models.Vendedor", "Vendedor")
+                        .WithMany("Clientes")
+                        .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

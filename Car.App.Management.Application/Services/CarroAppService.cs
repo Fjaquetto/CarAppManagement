@@ -27,6 +27,8 @@ namespace Car.App.Management.Application.Services
         }
         public async Task<bool> Adicionar(CarroViewModel carroViewModel)
         {
+            if (carroViewModel.ClienteId == 0) carroViewModel.ClienteId = 1;
+
             await _carroRepository.Adicionar(_mapper.Map<Carro>(carroViewModel));
             return true;
         }

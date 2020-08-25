@@ -30,8 +30,8 @@ namespace Car.App.Management.Infra.Data.Mapping
             // 1 : 1 => Cliente : Endereco
             builder.HasOne(x => x.Endereco)
                 .WithOne(x => x.Cliente)
-                .HasForeignKey<Endereco>(x => x.ClienteId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey<Endereco>(x => x.ClienteId);
+                //.OnDelete(DeleteBehavior.Cascade);
 
             // 1 : N => Cliente : Carro
             builder.HasMany(x => x.Carros)

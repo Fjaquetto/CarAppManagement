@@ -7,7 +7,7 @@ namespace Car.App.Management.Domain.Models
     public class Carro
     {
         public int Id { get; set; }
-        public int ClienteId { get; set; }
+        public int? ClienteId { get; set; }
         public int? VendedorId { get; set; }
 
         public string Modelo { get; set; }

@@ -9,7 +9,7 @@ namespace Car.App.Management.Application.ViewModels
         [Key]
         public int Id { get; set; }
 
-        public int ClienteId { get; set; }
+        public int? ClienteId { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar o modelo do carro.")]
         [MinLength(2)]

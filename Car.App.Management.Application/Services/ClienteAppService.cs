@@ -38,7 +38,6 @@ namespace Car.App.Management.Application.Services
         public async Task<bool> Atualizar(ClienteViewModel clienteViewModel)
         {
             await _clienteRepository.Atualizar(_mapper.Map<Cliente>(clienteViewModel));
-            //await _enderecoRepository.Atualizar(_mapper.Map<Endereco>(enderecoViewModel));
             return true;
         }
 

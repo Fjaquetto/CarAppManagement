@@ -14,7 +14,8 @@ using System.Threading.Tasks;
 namespace Car.App.Management.Services.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/account")]
+    [Produces("application/json")]
     public class AccountController : ApiController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -91,8 +92,7 @@ namespace Car.App.Management.Services.Api.Controllers
                 return Ok(token);
             }
 
-            Forbid("Login", result.ToString());
-            return BadRequest(userLogin);
+            return Forbid("Login", result.ToString());
         }
 
         private async Task<string> GenerateJwt(string email)

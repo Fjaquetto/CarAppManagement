@@ -5,6 +5,9 @@ namespace Car.App.Management.CC.Identity.Models
     public class UserRegistration
     {
         [Required(ErrorMessage = "The {0} field is mandatory")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "The {0} field is mandatory")]
         [EmailAddress(ErrorMessage = "The field {0} is in an invalid format")]
         public string Email { get; set; }
 

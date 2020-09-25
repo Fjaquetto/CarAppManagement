@@ -50,7 +50,7 @@ namespace Car.App.Management.Services.Api.Controllers
 
             var user = new IdentityUser
             {
-                UserName = userRegistration.Email,
+                UserName = userRegistration.Name,
                 Email = userRegistration.Email,
                 EmailConfirmed = true
             };
@@ -125,7 +125,7 @@ namespace Car.App.Management.Services.Api.Controllers
             return new LoginResponseViewModel
             {
                 AccessToken = encodedToken,
-                ExpiresIn = 999,
+                ExpiresIn = 9999,
                 UserToken = new UserTokenViewModel
                 {
                     Id = user.Id,

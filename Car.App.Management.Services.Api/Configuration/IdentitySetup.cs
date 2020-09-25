@@ -1,6 +1,7 @@
 ﻿using Car.App.Management.CC.Identity.Authorization;
 using Car.App.Management.CC.Identity.Extensions;
 using Car.App.Management.CC.Identity.Models;
+using Car.App.Management.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,11 +19,15 @@ namespace Car.App.Management.Services.Api.Configuration
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.AllowedUserNameCharacters = string.Empty;
+            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<IdentityMensagensPortugues>()
                 .AddDefaultTokenProviders();
+
 
             // JWT Setup
 

@@ -1,4 +1,5 @@
-﻿using Car.App.Management.CC.Identity.Models;
+﻿using Car.App.Management.Application.ViewModels;
+using Car.App.Management.CC.Identity.Models;
 using Car.App.Management.Domain.Interfaces;
 using Car.App.Management.Services.Api.Configuration;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,10 +94,10 @@ namespace Car.App.Management.Services.Api.Controllers
                 return Ok(token);
             }
 
-            return Forbid("Login", result.ToString());
+            return StatusCode(403);
         }
 
-        private async Task<string> GenerateJwt(string email)
+        private async Task<LoginResponseViewModel> GenerateJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             var claims = await _userManager.GetClaimsAsync(user);
@@ -108,16 +110,29 @@ namespace Car.App.Management.Services.Api.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+
+            var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {
                 Subject = identityClaims,
                 Issuer = _appSettings.Issuer,
                 Audience = _appSettings.ValidAt,
                 Expires = DateTime.UtcNow.AddHours(_appSettings.Expiration),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+            });
 
-            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            var encodedToken = tokenHandler.WriteToken(token);
+
+            return new LoginResponseViewModel
+            {
+                AccessToken = encodedToken,
+                ExpiresIn = 999,
+                UserToken = new UserTokenViewModel
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Claims = claims.Select(c => new ClaimViewModel { Type = c.Type, Value = c.Value })
+                }
+            };
         }
     }
 }

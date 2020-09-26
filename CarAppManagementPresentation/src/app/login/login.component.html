@@ -1,4 +1,3 @@
-
 <body>
 
     <div class="container h-100">
@@ -8,15 +7,25 @@
                     <div class="form-group" style="margin-top: 60%">
                         <label for="txtLogin"><b>Login:</b></label>
                         <input type="text" class="form-control username" id="txtLogin" placeholder="Login..."
-                            name="username" formControlName="Email">
+                            name="username" formControlName="Email" required
+                            [ngClass]="{'is-invalid': loginForm.get('Email').errors && (loginForm.get('Email').touched || loginForm.get('Email').dirty)}">
+                        <span class="text-danger"
+                            *ngIf="loginForm.get('Email').errors && (loginForm.get('Email').touched || loginForm.get('Email').dirty)">
+                            <p><b>Preencha o campo "Login"</b></p>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label for="txtSenha"><b>Senha:</b></label>
                         <input type="password" class="form-control password" id="txtSenha" placeholder="Senha..."
-                            name="password" formControlName="Password">
+                            name="password" formControlName="Password" required
+                            [ngClass]="{'is-invalid': loginForm.get('Password').errors && (loginForm.get('Password').touched || loginForm.get('Password').dirty)}">
+                            <span class="text-danger"
+                            *ngIf="loginForm.get('Password').errors && (loginForm.get('Password').touched || loginForm.get('Password').dirty)">
+                            <p><b>Preencha o campo "Senha"</b></p>
+                        </span>
                     </div>
-                    
-                        <button type="button" class="btn btn-success col-sm-12" (click)="logar()">Entrar</button>                  
+
+                    <button type="button" class="btn btn-success col-sm-12" (click)="logar()" [disabled]="!loginForm.valid">Entrar</button>
                 </form>
             </div>
         </div>

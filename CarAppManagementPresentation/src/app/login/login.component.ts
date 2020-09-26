@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -12,12 +12,13 @@ export class LoginComponent implements OnInit {
   urlServer: string = "https://localhost:44311/"; 
   loginForm: FormGroup;
 
-  constructor(private http: HttpClient, private _formBuilder: FormBuilder, private router: Router) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) { }
 
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      Email: new FormControl(),
-      Password: new FormControl()
+  ngOnInit(): void {   
+
+    this.loginForm = this.fb.group({
+      Email: ['', Validators.required],
+      Password: ['', Validators.required]
     })
 
     this.verificaUsuarioLogado();

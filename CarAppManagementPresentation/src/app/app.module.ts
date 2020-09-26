@@ -26,7 +26,7 @@ import { HomeComponent } from './home/home.component';
     NgbModule,
     HttpClientModule  
   ],
-  providers: [],
+  providers: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

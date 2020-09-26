@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
+
 export class LoginComponent implements OnInit {
   urlServer: string = "https://localhost:44311/"; 
   loginForm: FormGroup;
@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
     debugger;
 
     this.http.post(this.urlServer + "api/account/login", this.loginForm.value).subscribe({
-      next: data =>
+      next: (data: any) =>
       {
-        localStorage.setItem("auth-token", data.toString())
+        localStorage.setItem("auth-token", data.accessToken)
+        localStorage.setItem("user-token", JSON.stringify(data.userToken))
         this.verificaUsuarioLogado();
       },
       error: error => 
@@ -44,6 +45,9 @@ export class LoginComponent implements OnInit {
   verificaUsuarioLogado() {
     if (localStorage.getItem("auth-token") != null) {
       this.router.navigate(['home']);
+    }
+    else {
+      this.router.navigate(['']);
     }
   }
 }

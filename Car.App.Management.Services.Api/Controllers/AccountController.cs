@@ -130,6 +130,7 @@ namespace Car.App.Management.Services.Api.Controllers
                 {
                     Id = user.Id,
                     Email = user.Email,
+                    Name = user.UserName,
                     Claims = claims.Select(c => new ClaimViewModel { Type = c.Type, Value = c.Value })
                 }
             };

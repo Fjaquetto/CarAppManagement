@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   urlServer: string = "https://localhost:44311/"; 
   loginForm: FormGroup;
+  isLoggedIn: boolean;
+  carregarFooterNavbar: boolean = false;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) { }
 
@@ -26,19 +28,18 @@ export class LoginComponent implements OnInit {
 
   logar() {
 
-    debugger;
-
     this.http.post(this.urlServer + "api/account/login", this.loginForm.value).subscribe({
       next: (data: any) =>
       {
         localStorage.setItem("auth-token", data.accessToken)
-        localStorage.setItem("user-token", JSON.stringify(data.userToken))
+        localStorage.setItem("user-token", JSON.stringify(data.userToken))       
         this.verificaUsuarioLogado();
+        this.carregarFooterNavbar = true;
       },
       error: error => 
       {
         if (error.status == 403){
-        console.log("Login ou Senha Inválidos.")
+          this.isLoggedIn = false;
       }}     
     })
   }

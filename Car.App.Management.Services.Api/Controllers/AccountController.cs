@@ -86,7 +86,7 @@ namespace Car.App.Management.Services.Api.Controllers
                 });
             }
 
-            var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, false, true);
+            var result = await _signInManager.PasswordSignInAsync(await _userManager.FindByEmailAsync(userLogin.Email), userLogin.Password, false, true);
 
             if (result.Succeeded)
             {
@@ -99,6 +99,7 @@ namespace Car.App.Management.Services.Api.Controllers
 
         private async Task<LoginResponseViewModel> GenerateJwt(string email)
         {
+
             var user = await _userManager.FindByEmailAsync(email);
             var claims = await _userManager.GetClaimsAsync(user);
 

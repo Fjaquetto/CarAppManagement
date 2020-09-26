@@ -23,6 +23,7 @@ namespace Car.App.Management.Services.Api.Configuration
             {
                 options.User.AllowedUserNameCharacters = string.Empty;
             })
+            //services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<IdentityMensagensPortugues>()

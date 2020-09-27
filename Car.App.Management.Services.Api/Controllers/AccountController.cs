@@ -86,7 +86,14 @@ namespace Car.App.Management.Services.Api.Controllers
                 });
             }
 
-            var result = await _signInManager.PasswordSignInAsync(await _userManager.FindByEmailAsync(userLogin.Email), userLogin.Password, false, true);
+            var userName = await _userManager.FindByEmailAsync(userLogin.Email);
+
+            if (userName is null)
+            {
+                return StatusCode(403);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(userName, userLogin.Password, false, true);
 
             if (result.Succeeded)
             {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -8,10 +9,9 @@ import { LoginComponent } from '../login/login.component';
 export class FooterComponent implements OnInit {
   carregarFooter: boolean;
 
-  constructor() { }
+  constructor(public route: Router) { }
 
   ngOnInit(): void {
-
   }
 
 }

@@ -1,5 +1,12 @@
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+<div class="col-sm-12" style="bottom: 0; position: fixed; margin-bottom: 1%;" *ngIf="route.url != '/'">
+    <footer class="d-flex justify-content-center">
+            <span>
+                Place sticky footer content here.
+            </span>
+    </footer>
+</div>
+<!-- <footer class="footer" style="bottom: 0; margin: auto; width: 50%;" *ngIf="route.url != '/'">
+    <div class="container" style="justify-content: center; width: 100%;">
+        <span class="text-muted" style="text-align: center;">Place sticky footer content here.</span>
     </div>
-</footer>
+</footer> -->

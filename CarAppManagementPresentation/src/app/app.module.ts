@@ -22,7 +22,7 @@ import { CarroComponent } from './carro/carro.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    CarroComponent
+    CarroComponent,
   ],
   imports: [
     BrowserModule,

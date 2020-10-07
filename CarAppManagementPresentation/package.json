@@ -23,6 +23,8 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.0",
+    "primeicons": "^4.0.0",
+    "primeng": "^10.0.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

@@ -14,6 +14,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarroComponent } from './carro/carro.component';
 
+import { MenubarModule } from 'primeng/menubar';
+import { ButtonModule } from 'primeng/button';
+
+import { MenuItem } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { CarroComponent } from './carro/carro.component';
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule  
+    HttpClientModule,
+    MenubarModule,
+    ButtonModule
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent]

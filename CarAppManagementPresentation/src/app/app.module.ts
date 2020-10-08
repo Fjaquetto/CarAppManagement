@@ -19,6 +19,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -45,7 +47,8 @@ import { MenuItem } from 'primeng/api';
     ButtonModule,
     CardModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CalendarModule
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent]

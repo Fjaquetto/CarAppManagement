@@ -14,8 +14,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarroComponent } from './carro/carro.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
+
+
 
 import { MenuItem } from 'primeng/api';
 
@@ -37,7 +42,10 @@ import { MenuItem } from 'primeng/api';
     NgbModule,
     HttpClientModule,
     MenubarModule,
-    ButtonModule
+    ButtonModule,
+    CardModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent]

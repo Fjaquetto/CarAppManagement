@@ -20,11 +20,10 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
 
-
-
-
-import { MenuItem } from 'primeng/api';
 
 
 @NgModule({
@@ -48,7 +47,10 @@ import { MenuItem } from 'primeng/api';
     CardModule,
     DialogModule,
     BrowserAnimationsModule,
-    CalendarModule
+    CalendarModule,
+    InputMaskModule,
+    InputNumberModule,
+    CheckboxModule
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent]

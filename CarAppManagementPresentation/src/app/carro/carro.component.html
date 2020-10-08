@@ -12,10 +12,11 @@
 
     <form class="form-example" [formGroup]="carroForm">
         <div class="form-row">
+            <br>
 
             <div class="col">
-                <input type="text" class="form-control" id="txtModelo" placeholder="Modelo"
-                    formControlName="txtModelo" required
+                <input type="text" class="form-control" id="txtModelo" placeholder="Modelo" formControlName="txtModelo"
+                    required
                     [ngClass]="{'is-invalid': carroForm.get('txtModelo').errors && (carroForm.get('txtModelo').touched || carroForm.get('txtModelo').dirty)}">
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtModelo').errors && (carroForm.get('txtModelo').touched || carroForm.get('txtModelo').dirty)">
@@ -24,8 +25,7 @@
             </div>
 
             <div class="col">
-                <input type="text" class="form-control" id="txtCor" placeholder="Cor"
-                    formControlName="txtCor" required
+                <input type="text" class="form-control" id="txtCor" placeholder="Cor" formControlName="txtCor" required
                     [ngClass]="{'is-invalid': carroForm.get('txtCor').errors && (carroForm.get('txtCor').touched || carroForm.get('txtCor').dirty)}">
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtCor').errors && (carroForm.get('txtCor').touched || carroForm.get('txtCor').dirty)">
@@ -37,9 +37,68 @@
         <br>
         <div class="form-row">
             <div class="col">
-                <p-calendar formControlName="data" [(ngModel)]="data" [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br" dateFormat="dd/mm/yy" inputId="spanish"></p-calendar>
+                <p-calendar formControlName="txtAnoCarro" placeholder="Data de Fabricação"
+                    [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
+                    dateFormat="dd/mm/yy" inputId="spanish" required>
+                </p-calendar>
+            </div>
+
+            <div class="col">
+                <p-inputMask mask="***-****" [style]="{'text-transform': 'uppercase'}" type="text" id="txtPlaca"
+                    placeholder="" formControlName="txtPlaca" required
+                    [ngClass]="{'is-invalid': carroForm.get('txtPlaca').errors && (carroForm.get('txtPlaca').touched || carroForm.get('txtPlaca').dirty)}">
+                </p-inputMask>
+                <span class="text-danger"
+                    *ngIf="carroForm.get('txtPlaca').errors && (carroForm.get('txtPlaca').touched || carroForm.get('txtPlaca').dirty)">
+                    <p><b>Preencha o campo "Placa"</b></p>
+                </span>
+            </div>
+            <div class="col">
+                <p-inputNumber formControlName="txtValorComprado" id="txtValorComprado" value="" mode="currency"
+                    currency="BRL" locale="pt-BR">
+                </p-inputNumber>
+                <span class="text-danger"
+                    *ngIf="carroForm.get('txtValorComprado').errors && (carroForm.get('txtValorComprado').touched || carroForm.get('txtValorComprado').dirty)">
+                    <p><b>Preencha o campo "Valor de Compra"</b></p>
+                </span>
             </div>
         </div>
+        <br>
+        <div class="form-row">
+            <div class="col">
+                <p-inputNumber formControlName="txtValorVenda" id="txtValorVenda" value="" mode="currency"
+                    currency="BRL" locale="pt-BR">
+                </p-inputNumber>
+                <span class="text-danger"
+                    *ngIf="carroForm.get('txtValorVenda').errors && (carroForm.get('txtValorVenda').touched || carroForm.get('txtValorVenda').dirty)">
+                    <p><b>Preencha o campo "Valor de Venda"</b></p>
+                </span>
+            </div>
+            <div class="col">
+                <p-calendar formControlName="txtDataCompra" placeholder="Data de Compra"
+                    [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
+                    dateFormat="dd/mm/yy" inputId="spanish" required>
+                </p-calendar>
+            </div>
+            <div class="col">
+                <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda"
+                    [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
+                    dateFormat="dd/mm/yy" inputId="spanish" required>
+                </p-calendar>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col">
+                <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
+                IPVA Pago
+            </div>
+            <div class="col">
+                <p-checkbox formControlName="vendido" binary="true" inputId="binary2"></p-checkbox>
+                Vendido
+            </div>
+        </div>
+
     </form>
 
     <ng-template pTemplate="footer">

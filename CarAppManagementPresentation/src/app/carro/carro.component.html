@@ -7,7 +7,7 @@
     </p-card>
 </div>
 
-<p-dialog header="" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Veículos" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
 
     <form class="form-example" [formGroup]="carroForm">
@@ -15,6 +15,7 @@
             <br>
 
             <div class="col">
+                <label for="txtModelo"><b>Modelo</b></label>
                 <input type="text" class="form-control" id="txtModelo" placeholder="Modelo" formControlName="txtModelo"
                     required
                     [ngClass]="{'is-invalid': carroForm.get('txtModelo').errors && (carroForm.get('txtModelo').touched || carroForm.get('txtModelo').dirty)}">
@@ -25,6 +26,7 @@
             </div>
 
             <div class="col">
+                <label for="txtCor"><b>Cor</b></label>
                 <input type="text" class="form-control" id="txtCor" placeholder="Cor" formControlName="txtCor" required
                     [ngClass]="{'is-invalid': carroForm.get('txtCor').errors && (carroForm.get('txtCor').touched || carroForm.get('txtCor').dirty)}">
                 <span class="text-danger"
@@ -35,6 +37,17 @@
 
         </div>
         <br>
+        <div class="form-row">
+            <div class="col">
+                <label for=""><b>Data de Fabricação</b></label>
+            </div>
+            <div class="col">
+                <label for=""><b>Placa</b></label>
+            </div>
+            <div class="col">
+                <label for=""><b>Valor Comprado</b></label>
+            </div>
+        </div>
         <div class="form-row">
             <div class="col">
                 <p-calendar formControlName="txtAnoCarro" placeholder="Data de Fabricação"
@@ -66,6 +79,17 @@
         <br>
         <div class="form-row">
             <div class="col">
+                <label for=""><b>Valor de Venda</b></label>
+            </div>
+            <div class="col">
+                <label for=""><b>Data de Compra</b></label>
+            </div>
+            <div class="col">
+                <label for=""><b>Data de Venda</b></label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
                 <p-inputNumber formControlName="txtValorVenda" id="txtValorVenda" value="" mode="currency"
                     currency="BRL" locale="pt-BR">
                 </p-inputNumber>
@@ -90,12 +114,23 @@
         <br>
         <div class="form-row">
             <div class="col">
+                <label for=""><b>Detalhes</b></label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col">
                 <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
-                IPVA Pago
+                <b> IPVA Pago</b>
             </div>
             <div class="col">
                 <p-checkbox formControlName="vendido" binary="true" inputId="binary2"></p-checkbox>
-                Vendido
+                <b> Vendido</b>
             </div>
         </div>
 

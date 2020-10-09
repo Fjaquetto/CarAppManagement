@@ -23,6 +23,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 
 
 
@@ -50,7 +52,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     CalendarModule,
     InputMaskModule,
     InputNumberModule,
-    CheckboxModule
+    CheckboxModule,
+    InputTextareaModule
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent]

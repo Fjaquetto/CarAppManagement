@@ -25,6 +25,7 @@ export class CarroComponent implements OnInit {
       txtValorVenda: ['', Validators.required],
       txtDataCompra: ['', Validators.required],
       txtDataVenda: ['', Validators.required],
+      txtDetalhe: ['', Validators.required],
       ipvaPago: ['', Validators.required],
       vendido: ['', Validators.required]
     })

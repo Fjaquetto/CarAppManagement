@@ -82,8 +82,6 @@ export class CarroComponent implements OnInit {
 
     console.log(carro);
 
-    //json header
-
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("auth-token")
@@ -120,7 +118,7 @@ export class CarroComponent implements OnInit {
       return [year, month, day].join('-');
     }
     else {
-      return "";
+      return null;
     }
   }
 } 

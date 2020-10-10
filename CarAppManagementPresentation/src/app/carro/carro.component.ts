@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -7,13 +8,28 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   templateUrl: './carro.component.html'
 })
 export class CarroComponent implements OnInit {
+  urlServer: string = "https://localhost:44311/"; 
+
   displayModal: boolean;
   position: string;
   txtAnoCarro: Date;
   br: any;
   carroForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  modelo: string;
+  cor: string;
+  ano: string;
+  placa: string;
+  descricao: string;
+  valorComprado: number;
+  valorVenda: number;
+  dataCompra: string;
+  dataVenda: string;
+  ipvaPago: boolean;
+  vendido: boolean;
+
+
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.carroForm = this.fb.group({
@@ -26,8 +42,8 @@ export class CarroComponent implements OnInit {
       txtDataCompra: ['', Validators.required],
       txtDataVenda: ['', Validators.required],
       txtDetalhe: ['', Validators.required],
-      ipvaPago: ['', Validators.required],
-      vendido: ['', Validators.required]
+      ipvaPago: [false, Validators.required],
+      vendido: [false, Validators.required]
     })
 
     this.br = {
@@ -46,4 +62,65 @@ export class CarroComponent implements OnInit {
     this.displayModal = true;
   }
 
-}
+  adicionarCarro() {
+
+    debugger;
+
+    let carro = {
+      modelo: this.carroForm.controls['txtModelo'].value,
+      cor: this.carroForm.controls['txtCor'].value,
+      ano: this.formatarData(this.carroForm.controls['txtAnoCarro'].value),
+      placa: this.carroForm.controls['txtPlaca'].value,
+      valorComprado: this.carroForm.controls['txtValorComprado'].value,
+      valorVenda: this.carroForm.controls['txtValorVenda'].value,
+      dataCompra: this.formatarData(this.carroForm.controls['txtDataCompra'].value),
+      dataVenda: this.formatarData(this.carroForm.controls['txtDataVenda'].value),
+      descricao: this.carroForm.controls['txtDetalhe'].value,
+      ipvaPago: this.carroForm.controls['ipvaPago'].value,
+      vendido: this.carroForm.controls['vendido'].value
+    }
+
+    console.log(carro);
+
+    //json header
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("auth-token")
+    });
+
+    let options = { headers: headers };
+
+    console.log(options);
+
+    this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
+      next: (data: any) =>
+      {
+        console.log(data);
+      },
+      error: error => 
+      {
+        console.log(error)
+      }
+    })      
+  }
+
+  formatarData(date) {
+    if (date !== "") {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+    else {
+      return "";
+    }
+  }
+} 

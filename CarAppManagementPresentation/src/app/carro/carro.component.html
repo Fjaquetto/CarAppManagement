@@ -50,7 +50,7 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <p-calendar formControlName="txtAnoCarro" placeholder="Data de Fabricação"
+                <p-calendar dataType="string" formControlName="txtAnoCarro" placeholder="Data de Fabricação"
                     [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
                     dateFormat="dd/mm/yy" inputId="spanish" required>
                 </p-calendar>
@@ -67,7 +67,7 @@
                 </span>
             </div>
             <div class="col">
-                <p-inputNumber formControlName="txtValorComprado" id="txtValorComprado" value="" mode="currency"
+                <p-inputNumber formControlName="txtValorComprado" id="txtValorComprado" mode="currency"
                     currency="BRL" locale="pt-BR">
                 </p-inputNumber>
                 <span class="text-danger"
@@ -119,7 +119,7 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" formControlName="txtDetalhe" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
         <br>
@@ -139,7 +139,7 @@
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" (click)="displayModal=false" label="Cancelar"
             class="p-button-raised p-button-secondary"></button>
-        <button pButton pRipple type="button" icon="pi pi-save" (click)="displayModal=false" label="Salvar"
+        <button pButton pRipple type="button" icon="pi pi-save" (click)="adicionarCarro()" label="Salvar"
             class="p-button-raised p-button-success"></button>
     </ng-template>
 </p-dialog>

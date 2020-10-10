@@ -24,6 +24,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
@@ -55,7 +56,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     CheckboxModule,
     InputTextareaModule
   ],
-  providers: [LoginComponent],
+  providers: [LoginComponent,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+  JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

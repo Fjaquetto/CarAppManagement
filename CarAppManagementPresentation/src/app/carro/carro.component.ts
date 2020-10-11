@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { Carros } from '../DTOs/carros';
 
 
 @Component({
@@ -15,6 +17,8 @@ export class CarroComponent implements OnInit {
   txtAnoCarro: Date;
   br: any;
   carroForm: FormGroup;
+  carros: Carros[];
+  erroForm: boolean = false;
 
   modelo: string;
   cor: string;
@@ -28,8 +32,7 @@ export class CarroComponent implements OnInit {
   ipvaPago: boolean;
   vendido: boolean;
 
-
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.carroForm = this.fb.group({
@@ -38,9 +41,9 @@ export class CarroComponent implements OnInit {
       txtAnoCarro: ['', Validators.required],
       txtPlaca: ['', Validators.required],
       txtValorComprado: ['', Validators.required],
-      txtValorVenda: ['', Validators.required],
+      txtValorVenda: [''],
       txtDataCompra: ['', Validators.required],
-      txtDataVenda: ['', Validators.required],
+      txtDataVenda: [''],
       txtDetalhe: ['', Validators.required],
       ipvaPago: [false, Validators.required],
       vendido: [false, Validators.required]
@@ -56,6 +59,8 @@ export class CarroComponent implements OnInit {
       today: 'Hoje',
       clear: 'Limpar'
     }
+
+    this.obterCarros();
   }
 
   showModalDialog() {
@@ -64,13 +69,11 @@ export class CarroComponent implements OnInit {
 
   adicionarCarro() {
 
-    debugger;
-
     let carro = {
       modelo: this.carroForm.controls['txtModelo'].value,
       cor: this.carroForm.controls['txtCor'].value,
       ano: this.formatarData(this.carroForm.controls['txtAnoCarro'].value),
-      placa: this.carroForm.controls['txtPlaca'].value,
+      placa: this.carroForm.controls['txtPlaca'].value.toUpperCase(),
       valorComprado: this.carroForm.controls['txtValorComprado'].value,
       valorVenda: this.carroForm.controls['txtValorVenda'].value,
       dataCompra: this.formatarData(this.carroForm.controls['txtDataCompra'].value),
@@ -80,8 +83,6 @@ export class CarroComponent implements OnInit {
       vendido: this.carroForm.controls['vendido'].value
     }
 
-    console.log(carro);
-
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("auth-token")
@@ -89,18 +90,40 @@ export class CarroComponent implements OnInit {
 
     let options = { headers: headers };
 
-    console.log(options);
-
     this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
       next: (data: any) =>
       {
         console.log(data);
+        this.displayModal = false;
+        this.obterCarros();
+        this.messageService.add({severity:'success', summary:'Adicionado!', detail:'Veículo adicionado com sucesso!'});
+
       },
       error: error => 
       {
         console.log(error)
+        this.erroForm = true;
       }
     })      
+  }
+
+  obterCarros() {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("auth-token")
+    });
+
+    let options = { headers: headers };
+
+    this.http.get(this.urlServer + "api/veiculos", options)  
+    .toPromise()
+    .then(res => <Carros[]> res)
+    .then(carros => { 
+      this.carros = carros
+      console.log(this.carros)
+    });  
+
+
   }
 
   formatarData(date) {

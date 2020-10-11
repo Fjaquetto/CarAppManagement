@@ -1,9 +1,47 @@
 <br>
+<p-toast></p-toast>
 
 <div class="col-sm-9" style="margin: 0 auto; height: 88vh">
     <p-card header="Veículos" [style]="{height: '88vh'}">
         <button pButton pRipple type="button" label="Adicionar" class="p-button-raised" icon="pi pi-save"
             (click)="showModalDialog()"></button>
+
+            <hr>
+
+            <p-table [value]="carros">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Cor</th>
+                        <th>Ano</th>
+                        <th>Placa</th>
+                        <th>Descrição</th>
+                        <th>Valor de Compra</th>
+                        <th>Valor de Venda</th>
+                        <th>Data de Compra</th>
+                        <th>Data de Venda</th>
+                        <th>IPVA Pago</th>
+                        <th>Vendido</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-car>
+                    <tr>
+                        <td>{{car.modelo}}</td>
+                        <td>{{car.cor}}</td>
+                        <td>{{car.ano}}</td>
+                        <td>{{car.placa}}</td>
+                        <td>{{car.descricao}}</td>
+                        <td>{{car.valorComprado}}</td>
+                        <td>{{car.valorVenda}}</td>
+                        <td>{{car.dataCompra}}</td>
+                        <td>{{car.dataVenda}}</td>
+                        <td>{{car.ipvaPago}}</td>
+                        <td>{{car.vendido}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+
     </p-card>
 </div>
 
@@ -16,7 +54,7 @@
 
             <div class="col">
                 <label for="txtModelo"><b>Modelo</b></label>
-                <input type="text" class="form-control" id="txtModelo" placeholder="Modelo" formControlName="txtModelo"
+                <input type="text" class="form-control" id="txtModelo" maxlength="100" placeholder="Modelo" formControlName="txtModelo"
                     required
                     [ngClass]="{'is-invalid': carroForm.get('txtModelo').errors && (carroForm.get('txtModelo').touched || carroForm.get('txtModelo').dirty)}">
                 <span class="text-danger"
@@ -27,7 +65,7 @@
 
             <div class="col">
                 <label for="txtCor"><b>Cor</b></label>
-                <input type="text" class="form-control" id="txtCor" placeholder="Cor" formControlName="txtCor" required
+                <input type="text" class="form-control" id="txtCor" maxlength="100" placeholder="Cor" formControlName="txtCor" required
                     [ngClass]="{'is-invalid': carroForm.get('txtCor').errors && (carroForm.get('txtCor').touched || carroForm.get('txtCor').dirty)}">
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtCor').errors && (carroForm.get('txtCor').touched || carroForm.get('txtCor').dirty)">
@@ -107,7 +145,7 @@
             <div class="col">
                 <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda"
                     [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
-                    dateFormat="dd/mm/yy" inputId="spanish" required>
+                    dateFormat="dd/mm/yy" inputId="spanish">
                 </p-calendar>
             </div>
         </div>
@@ -133,13 +171,15 @@
                 <b> Vendido</b>
             </div>
         </div>
-
     </form>
 
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" (click)="displayModal=false" label="Cancelar"
             class="p-button-raised p-button-secondary"></button>
         <button pButton pRipple type="button" icon="pi pi-save" (click)="adicionarCarro()" label="Salvar"
-            class="p-button-raised p-button-success"></button>
+            class="p-button-raised p-button-success" [disabled]="!carroForm.valid"></button>
     </ng-template>
+    <span class="text-danger" *ngIf="erroForm == true">
+        <h5>Sistema temporariamente indisponível.</h5>
+    </span>
 </p-dialog>

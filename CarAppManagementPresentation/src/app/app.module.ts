@@ -22,6 +22,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -58,7 +59,8 @@ import { TableModule } from 'primeng/table';
     CheckboxModule,
     InputTextareaModule,
     ToastModule,
-    TableModule
+    TableModule,
+    InputTextModule
   ],
   providers: [LoginComponent,
     MessageService,

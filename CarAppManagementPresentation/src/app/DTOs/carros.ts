@@ -3,9 +3,11 @@ export interface Carros {
     cor;
     ano;
     placa;
+    renavam;
     descricao;
     valorComprado;
     valorVenda;
+    debitoPendente;
     dataCompra;
     dataVenda;
     ipvaPago;

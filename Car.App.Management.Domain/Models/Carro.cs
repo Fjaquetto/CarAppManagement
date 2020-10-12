@@ -12,11 +12,13 @@ namespace Car.App.Management.Domain.Models
 
         public string Modelo { get; set; }
         public string Cor { get; set; }
-        public DateTime Ano { get; set; }
+        public string Ano { get; set; }
         public string Placa { get; set; }
+        public string Renavam { get; set; }
         public string Descricao { get; set; }
         public decimal ValorComprado { get; set; }
         public decimal? ValorVenda { get; set; }
+        public decimal? DebitoPendente { get; set; }
         public DateTime DataCompra { get; set; }
         public DateTime? DataVenda { get; set; }
         public bool IpvaPago { get; set; }

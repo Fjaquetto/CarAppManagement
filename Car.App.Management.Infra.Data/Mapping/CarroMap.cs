@@ -21,13 +21,19 @@ namespace Car.App.Management.Infra.Data.Mapping
                 .IsRequired();
 
             builder.Property(c => c.Ano)
-                .HasColumnType("datetime")
+                .HasColumnType("varchar(9)")
                 .IsRequired();
 
             builder.Property(c => c.Placa)
                 .HasColumnType("varchar(13)")
                 .HasMaxLength(13)
                 .IsRequired();
+
+            builder.Property(c => c.Renavam)
+                .HasColumnType("varchar(11)")
+                .HasMaxLength(11)
+                .IsRequired();
+
 
             builder.Property(c => c.Descricao)
                 .HasColumnType("varchar(200)")
@@ -39,6 +45,9 @@ namespace Car.App.Management.Infra.Data.Mapping
                 .IsRequired();
 
             builder.Property(c => c.ValorVenda)
+                .HasColumnType("decimal(18,2)");
+
+            builder.Property(c => c.DebitoPendente)
                 .HasColumnType("decimal(18,2)");
 
             builder.Property(c => c.DataCompra)

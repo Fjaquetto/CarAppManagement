@@ -10,7 +10,7 @@ import { Carros } from '../DTOs/carros';
   templateUrl: './carro.component.html'
 })
 export class CarroComponent implements OnInit {
-  urlServer: string = "https://localhost:44311/"; 
+  urlServer: string = "https://localhost:44311/";
 
   displayModal: boolean;
   position: string;
@@ -40,8 +40,10 @@ export class CarroComponent implements OnInit {
       txtCor: ['', Validators.required],
       txtAnoCarro: ['', Validators.required],
       txtPlaca: ['', Validators.required],
+      txtRenavam: ['', Validators.required],
       txtValorComprado: ['', Validators.required],
       txtValorVenda: [''],
+      txtDebitoPendente: [''],
       txtDataCompra: ['', Validators.required],
       txtDataVenda: [''],
       txtDetalhe: ['', Validators.required],
@@ -72,12 +74,14 @@ export class CarroComponent implements OnInit {
     let carro = {
       modelo: this.carroForm.controls['txtModelo'].value,
       cor: this.carroForm.controls['txtCor'].value,
-      ano: this.formatarData(this.carroForm.controls['txtAnoCarro'].value),
+      ano: this.carroForm.controls['txtAnoCarro'].value,
       placa: this.carroForm.controls['txtPlaca'].value.toUpperCase(),
+      renavam: this.carroForm.controls['txtRenavam'].value,
       valorComprado: this.carroForm.controls['txtValorComprado'].value,
       valorVenda: this.carroForm.controls['txtValorVenda'].value,
       dataCompra: this.formatarData(this.carroForm.controls['txtDataCompra'].value),
       dataVenda: this.formatarData(this.carroForm.controls['txtDataVenda'].value),
+      debitoPendente: this.carroForm.controls['txtDebitoPendente'].value,
       descricao: this.carroForm.controls['txtDetalhe'].value,
       ipvaPago: this.carroForm.controls['ipvaPago'].value,
       vendido: this.carroForm.controls['vendido'].value
@@ -91,20 +95,18 @@ export class CarroComponent implements OnInit {
     let options = { headers: headers };
 
     this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
-      next: (data: any) =>
-      {
+      next: (data: any) => {
         console.log(data);
         this.displayModal = false;
         this.obterCarros();
-        this.messageService.add({severity:'success', summary:'Adicionado!', detail:'Veículo adicionado com sucesso!'});
+        this.messageService.add({ severity: 'success', summary: 'Adicionado!', detail: 'Veículo adicionado com sucesso!' });
 
       },
-      error: error => 
-      {
+      error: error => {
         console.log(error)
         this.erroForm = true;
       }
-    })      
+    })
   }
 
   obterCarros() {
@@ -115,14 +117,13 @@ export class CarroComponent implements OnInit {
 
     let options = { headers: headers };
 
-    this.http.get(this.urlServer + "api/veiculos", options)  
-    .toPromise()
-    .then(res => <Carros[]> res)
-    .then(carros => { 
-      this.carros = carros
-      console.log(this.carros)
-    });  
-
+    this.http.get(this.urlServer + "api/veiculos", options)
+      .toPromise()
+      .then(res => <Carros[]>res)
+      .then(carros => {
+        this.carros = carros
+        console.log(this.carros)
+      });
 
   }
 
@@ -143,5 +144,36 @@ export class CarroComponent implements OnInit {
     else {
       return null;
     }
+  }
+
+  formatarDataTabela(date) {
+
+    if (!date) 
+      return null;
+    
+    if (date !== "") {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [day, month, year].join('/');
+    }
+    else {
+      return null;
+    }
+  }
+
+  formatarBool(data) {
+    if (data == true)
+      return "Sim"
+    
+    if (data == false)
+      return "Não"    
   }
 } 

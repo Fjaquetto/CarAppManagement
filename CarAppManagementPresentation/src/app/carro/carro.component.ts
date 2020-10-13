@@ -13,6 +13,8 @@ export class CarroComponent implements OnInit {
   urlServer: string = "https://localhost:44311/";
 
   displayModal: boolean;
+  displayDescricao: boolean;
+  descricaoModal: string;
   position: string;
   txtAnoCarro: Date;
   br: any;
@@ -152,9 +154,9 @@ export class CarroComponent implements OnInit {
 
   formatarDataTabela(date) {
 
-    if (!date) 
+    if (!date)
       return null;
-    
+
     if (date !== "") {
       var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -176,8 +178,13 @@ export class CarroComponent implements OnInit {
   formatarBool(data) {
     if (data == true)
       return "Sim"
-    
+
     if (data == false)
-      return "Não"    
+      return "Não"
+  }
+
+  mostrarDetalheCarro(data) {
+    this.displayDescricao = true;
+    this.descricaoModal = data;
   }
 } 

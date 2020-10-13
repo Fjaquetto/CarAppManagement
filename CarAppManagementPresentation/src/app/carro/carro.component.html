@@ -1,6 +1,10 @@
 <br>
 <p-toast></p-toast>
 
+<p-dialog header="Detalhes" [(visible)]="displayDescricao">
+    {{descricaoModal}}
+</p-dialog>
+
 <div class="col-sm-9" style="margin: 0 auto; height: 88vh">
     <p-card header="Veículos" [style]="{height: '88vh'}">
         <button pButton pRipple type="button" label="Adicionar" class="p-button-raised" icon="pi pi-save"
@@ -67,7 +71,7 @@
                         <div class="form-row">
                             <button pButton pRipple type="button" icon="pi pi-search"
                                 class="p-button-rounded p-button-success p-button-text"
-                                style="margin: 0 auto;"></button>
+                                style="margin: 0 auto;" (click)="mostrarDetalheCarro(car.descricao)"></button>
                         </div>
                     </td>
                     <td>{{car.valorComprado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>

@@ -27,6 +27,11 @@ namespace Car.App.Management.Application.Services
         }
         public async Task<bool> Adicionar(CarroViewModel carroViewModel)
         {
+            if (carroViewModel.DataVenda != null)           
+                carroViewModel.Vendido = true;          
+            else           
+                carroViewModel.Vendido = false;
+            
             await _carroRepository.Adicionar(_mapper.Map<Carro>(carroViewModel));
             return true;
         }

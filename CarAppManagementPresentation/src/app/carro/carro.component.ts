@@ -87,8 +87,7 @@ export class CarroComponent implements OnInit {
       dataVenda: this.formatarData(this.carroForm.controls['txtDataVenda'].value),
       debitoPendente: this.carroForm.controls['txtDebitoPendente'].value,
       descricao: this.carroForm.controls['txtDetalhe'].value,
-      ipvaPago: this.carroForm.controls['ipvaPago'].value,
-      vendido: this.isCarroVendido()
+      ipvaPago: this.carroForm.controls['ipvaPago'].value
     }
 
     let headers = new HttpHeaders({
@@ -180,14 +179,5 @@ export class CarroComponent implements OnInit {
     
     if (data == false)
       return "Não"    
-  }
-
-  isCarroVendido() {
-    if (!this.carroForm.controls['txtDataVenda'].value) {
-      return false;
-    }
-    else {
-      return true;
-    }
   }
 } 

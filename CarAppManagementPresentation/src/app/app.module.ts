@@ -14,6 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarroComponent } from './carro/carro.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
@@ -60,7 +62,8 @@ import { TableModule } from 'primeng/table';
     InputTextareaModule,
     ToastModule,
     TableModule,
-    InputTextModule
+    InputTextModule,
+    NgxSpinnerModule
   ],
   providers: [LoginComponent,
     MessageService,

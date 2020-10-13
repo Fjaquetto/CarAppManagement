@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 
 @Component({
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn: boolean;
   carregarFooterNavbar: boolean = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private jwt: JwtHelperService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private jwt: JwtHelperService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
 
@@ -31,14 +33,18 @@ export class LoginComponent implements OnInit {
   }
 
   logar() {
+    this.spinner.show();
+
     this.http.post(this.urlServer + "api/account/login", this.loginForm.value).subscribe({
       next: (data: any) => {
+        this.spinner.hide();
         localStorage.setItem("auth-token", data.accessToken)
         localStorage.setItem("user-token", JSON.stringify(data.userToken))
         this.verificaUsuarioLogado();
         this.carregarFooterNavbar = true;
       },
       error: error => {
+        this.spinner.hide();
         if (error.status == 403) {
           this.isLoggedIn = false;
         }

@@ -8,7 +8,9 @@
 
         <hr>
 
-        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="500px" [lazy]="true" [loading]="loading"
+        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="500px"
+        [loading]="loading"
+
             [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
             [globalFilterFields]="['modelo','cor','ano','placa']">
             <ng-template pTemplate="caption">
@@ -37,7 +39,6 @@
                     <th>Data de Compra</th>
                     <th>Data de Venda</th>
                     <th>IPVA Pago</th>
-                    <th>Vendido</th>
 
                     <!-- <th pSortableColumn="modelo">Modelo<p-sortIcon field="modelo"></p-sortIcon></th>
                     <th pSortableColumn="cor">Cor<p-sortIcon field="cor"></p-sortIcon></th>
@@ -75,8 +76,6 @@
                     <td>{{formatarDataTabela(car.dataCompra)}}</td>
                     <td>{{formatarDataTabela(car.dataVenda)}}</td>
                     <td>{{formatarBool(car.ipvaPago)}}</td>
-                    <td>{{formatarBool(car.vendido)}}</td>
-
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">
@@ -208,6 +207,9 @@
             <div class="col">
                 <label for=""><b>Débito Pendente</b></label>
             </div>
+            <div class="col">
+                <label for=""><b></b></label>
+            </div>
         </div>
         <div class="form-row">
             <div class="col">
@@ -225,6 +227,10 @@
                     currency="BRL" locale="pt-BR">
                 </p-inputNumber>
             </div>
+            <div class="col">
+                <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
+                <b>  IPVA Pago</b>
+            </div>
         </div>
         <br>
         <div class="form-row">
@@ -240,14 +246,7 @@
         </div>
         <br>
         <div class="form-row">
-            <div class="col">
-                <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
-                <b> IPVA Pago</b>
-            </div>
-            <div class="col">
-                <p-checkbox formControlName="vendido" binary="true" inputId="binary2"></p-checkbox>
-                <b> Vendido</b>
-            </div>
+
         </div>
     </form>
 

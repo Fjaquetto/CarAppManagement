@@ -53,7 +53,6 @@ export class CarroComponent implements OnInit {
       txtDataVenda: [''],
       txtDetalhe: ['', Validators.required],
       ipvaPago: [false, Validators.required],
-      vendido: [false, Validators.required]
     })
 
     this.br = {
@@ -89,7 +88,7 @@ export class CarroComponent implements OnInit {
       debitoPendente: this.carroForm.controls['txtDebitoPendente'].value,
       descricao: this.carroForm.controls['txtDetalhe'].value,
       ipvaPago: this.carroForm.controls['ipvaPago'].value,
-      vendido: this.carroForm.controls['vendido'].value
+      vendido: this.isCarroVendido()
     }
 
     let headers = new HttpHeaders({
@@ -181,5 +180,14 @@ export class CarroComponent implements OnInit {
     
     if (data == false)
       return "Não"    
+  }
+
+  isCarroVendido() {
+    if (!this.carroForm.controls['txtDataVenda'].value) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 } 

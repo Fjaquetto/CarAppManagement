@@ -20,6 +20,8 @@ export class CarroComponent implements OnInit {
   carros: Carros[];
   erroForm: boolean = false;
 
+  loading: boolean;
+
   modelo: string;
   cor: string;
   ano: string;
@@ -35,6 +37,9 @@ export class CarroComponent implements OnInit {
   constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
 
   ngOnInit(): void {
+
+    this.loading = true;
+
     this.carroForm = this.fb.group({
       txtModelo: ['', Validators.required],
       txtCor: ['', Validators.required],
@@ -123,6 +128,7 @@ export class CarroComponent implements OnInit {
       .then(carros => {
         this.carros = carros
         console.log(this.carros)
+        this.loading = false;
       });
 
   }

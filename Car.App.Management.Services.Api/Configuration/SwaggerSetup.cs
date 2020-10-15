@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Car.App.Management.Services.Api.Configuration
 {
@@ -56,6 +58,8 @@ namespace Car.App.Management.Services.Api.Configuration
 
         public static void UseSwaggerSetup(this IApplicationBuilder app)
         {
+            //app.UseMiddleware<SwaggerAuthorizedMiddleware>();
+
             if (app == null) throw new ArgumentNullException(nameof(app));
 
             app.UseSwagger();
@@ -63,6 +67,28 @@ namespace Car.App.Management.Services.Api.Configuration
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car App Management");
             });
+        }
+    }
+
+    public class SwaggerAuthorizedMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public SwaggerAuthorizedMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            if (context.Request.Path.StartsWithSegments("/swagger") && !context.User.Identity.IsAuthenticated)
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+                return;
+            }
+
+            await _next.Invoke(context);
         }
     }
 }

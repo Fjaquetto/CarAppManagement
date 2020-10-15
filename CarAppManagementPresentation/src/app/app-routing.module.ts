@@ -7,7 +7,7 @@ import { CarroComponent } from './carro/carro.component';
 const routes: Routes = [
 { path: '', component: LoginComponent },
 { path: 'home', component: HomeComponent },
-{ path: 'carro', component: CarroComponent }
+{ path: 'veiculo', component: CarroComponent }
 ];
 
 @NgModule({

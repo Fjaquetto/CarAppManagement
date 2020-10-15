@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
   constructor(public route: Router, public login: LoginComponent) { }
 
   ngOnInit(): void {
-    console.log(this.route.url);
 
     this.items = [
       {
@@ -26,7 +25,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Veículos',
         icon: 'pi pi-fw pi-briefcase',
-        routerLink: "/carro"
+        routerLink: "/veiculo"
       }
     ];
   }

@@ -56,7 +56,12 @@ export class LoginComponent implements OnInit {
 
     if (localStorage.getItem("auth-token") != null) {
       if (!this.jwt.isTokenExpired(localStorage.getItem("auth-token"))) {
-        this.router.navigate(['home']);
+        if (this.router.url == '/') { 
+          this.router.navigate(['home']);
+        }
+        else {
+          this.router.navigate([this.router.url]);
+        }      
       } 
       else {
         localStorage.clear();

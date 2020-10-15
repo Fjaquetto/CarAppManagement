@@ -4,6 +4,7 @@ using Car.App.Management.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Car.App.Management.Services.Api.Controllers
@@ -48,6 +49,23 @@ namespace Car.App.Management.Services.Api.Controllers
         public async Task<CarroViewModel> Get(int id)
         {
             return await _carroAppService.ObterPorId(id);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(CarroViewModel carroViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    errors = ModelState
+                });
+            }
+
+            await _carroAppService.Atualizar(carroViewModel);
+
+            return Ok(carroViewModel);
         }
 
         [HttpDelete("{id:int}")]

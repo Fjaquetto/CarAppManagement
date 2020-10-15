@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Carros } from '../DTOs/carros';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -36,9 +37,12 @@ export class CarroComponent implements OnInit {
   ipvaPago: boolean;
   vendido: boolean;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
+  idCarro: number;
+
+  constructor(private login: LoginComponent, private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.login.verificaUsuarioLogado();
 
     this.loading = true;
 
@@ -72,12 +76,15 @@ export class CarroComponent implements OnInit {
   }
 
   showModalDialog() {
+    this.limparModal();
+
     this.displayModal = true;
   }
 
   adicionarCarro() {
 
     let carro = {
+      id: this.idCarro,
       modelo: this.carroForm.controls['txtModelo'].value,
       cor: this.carroForm.controls['txtCor'].value,
       ano: this.carroForm.controls['txtAnoCarro'].value,
@@ -99,19 +106,34 @@ export class CarroComponent implements OnInit {
 
     let options = { headers: headers };
 
-    this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.displayModal = false;
-        this.obterCarros();
-        this.messageService.add({ severity: 'success', summary: 'Adicionado!', detail: 'Veículo adicionado com sucesso!' });
-
-      },
-      error: error => {
-        console.log(error)
-        this.erroForm = true;
-      }
-    })
+    if (!this.idCarro) {
+      this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
+        next: (data: any) => {
+          this.displayModal = false;
+          this.obterCarros();
+          this.messageService.add({ severity: 'success', summary: 'Adicionado!', detail: 'Veículo adicionado com sucesso!' });
+  
+        },
+        error: error => {
+          console.log(error)
+          this.erroForm = true;
+        }
+      })
+    }
+    else {
+      this.http.put(this.urlServer + "api/veiculos", carro, options).subscribe({
+        next: (data: any) => {
+          this.displayModal = false;
+          this.obterCarros();
+          this.messageService.add({ severity: 'success', summary: 'Atualizado!', detail: 'Veículo atualizado com sucesso!' });
+  
+        },
+        error: error => {
+          console.log(error)
+          this.erroForm = true;
+        }
+      })
+    }
   }
 
   obterCarros() {
@@ -127,7 +149,6 @@ export class CarroComponent implements OnInit {
       .then(res => <Carros[]>res)
       .then(carros => {
         this.carros = carros
-        console.log(this.carros)
         this.loading = false;
       });
 
@@ -183,8 +204,55 @@ export class CarroComponent implements OnInit {
       return "Não"
   }
 
+  formatarDataModal(data) {
+    if (!data) {
+      return null;
+    }
+    else {
+      return new Date(data);
+    }
+  }
+
   mostrarDetalheCarro(data) {
     this.displayDescricao = true;
     this.descricaoModal = data;
+  }
+
+  popularModal(data) {
+    console.log(data);
+
+    this.carroForm.controls['txtModelo'].setValue(data.modelo);
+    this.carroForm.controls['txtCor'].setValue(data.cor);
+    this.carroForm.controls['txtAnoCarro'].setValue(data.ano);
+    this.carroForm.controls['txtPlaca'].setValue(data.placa);
+    this.carroForm.controls['txtRenavam'].setValue(data.renavam);
+    this.carroForm.controls['txtValorComprado'].setValue(data.valorComprado);
+    this.carroForm.controls['txtDebitoPendente'].setValue(data.debitoPendente);
+    this.carroForm.controls['txtValorVenda'].setValue(data.valorVenda);
+    this.carroForm.controls['txtDataCompra'].setValue(this.formatarDataModal(data.dataCompra));
+    this.carroForm.controls['txtDataVenda'].setValue(this.formatarDataModal(data.dataVenda));
+    this.carroForm.controls['txtDetalhe'].setValue(data.descricao);
+    this.carroForm.controls['ipvaPago'].setValue(data.ipvaPago);
+
+    this.idCarro = data.id;
+
+    this.displayModal = true;
+  }
+
+  limparModal() {
+    this.carroForm.get('txtModelo').reset();
+    this.carroForm.get('txtCor').reset();
+    this.carroForm.get('txtAnoCarro').reset();
+    this.carroForm.get('txtPlaca').reset();
+    this.carroForm.get('txtRenavam').reset();
+    this.carroForm.controls['txtValorComprado'].setValue(0);
+    this.carroForm.controls['txtValorVenda'].setValue(0);
+    this.carroForm.controls['txtDebitoPendente'].setValue(0);
+    this.carroForm.get('txtDataCompra').reset();
+    this.carroForm.get('txtDataVenda').reset();
+    this.carroForm.get('txtDetalhe').reset();
+    this.carroForm.get('ipvaPago').reset();
+
+    this.idCarro = 0;
   }
 } 

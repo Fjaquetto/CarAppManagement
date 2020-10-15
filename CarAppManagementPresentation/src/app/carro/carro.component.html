@@ -12,11 +12,9 @@
 
         <hr>
 
-        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="500px"
-        [loading]="loading"
-
-            [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
-            [globalFilterFields]="['modelo','cor','ano','placa']">
+        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="500px" [loading]="loading" [paginator]="true"
+            [rows]="10" [rowsPerPageOptions]="[10,25,50]"
+            [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']">
             <ng-template pTemplate="caption">
                 <div class="table-header form-row">
                     <h5>Lista de Veículos</h5>
@@ -31,37 +29,34 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
+                    <th>Editar</th>
                     <th>Modelo</th>
                     <th>Cor</th>
-                    <th>Ano</th>
+                    <th pSortableColumn="ano">Ano<p-sortIcon field="ano"></p-sortIcon>
+                    </th>
                     <th>Placa</th>
                     <th>Renavam</th>
                     <th>Descrição</th>
                     <th>Valor de Compra</th>
                     <th>Valor de Venda</th>
                     <th>Débito Pendente</th>
-                    <th>Data de Compra</th>
-                    <th>Data de Venda</th>
-                    <th>IPVA Pago</th>
-
-                    <!-- <th pSortableColumn="modelo">Modelo<p-sortIcon field="modelo"></p-sortIcon></th>
-                    <th pSortableColumn="cor">Cor<p-sortIcon field="cor"></p-sortIcon></th>
-                    <th pSortableColumn="ano">Ano<p-sortIcon field="ano"></p-sortIcon></th>
-                    <th pSortableColumn="placa">Placa<p-sortIcon field="placa"></p-sortIcon></th>
-                    <th pSortableColumn="renavam">Renavam<p-sortIcon field="renavam"></p-sortIcon></th>
-                    <th pSortableColumn="descricao">Descrição<p-sortIcon field="descricao"></p-sortIcon></th>
-                    <th pSortableColumn="valorComprado">Valor de Compra<p-sortIcon field="valorComprado"></p-sortIcon></th>
-                    <th pSortableColumn="valorVenda">Valor de Venda<p-sortIcon field="valorVenda"></p-sortIcon></th>
-                    <th pSortableColumn="debitoPendente">Débito Pendente<p-sortIcon field="debitoPendente"></p-sortIcon></th>
-                    <th pSortableColumn="dataCompra">Data de Compra<p-sortIcon field="dataCompra"></p-sortIcon></th>
-                    <th pSortableColumn="dataVenda">Data de Venda<p-sortIcon field="dataVenda"></p-sortIcon></th>
-                    <th pSortableColumn="ipvaPago">IPVA Pago<p-sortIcon field="ipvaPago"></p-sortIcon></th>
-                    <th pSortableColumn="vendido">Vendido<p-sortIcon field="vendido"></p-sortIcon></th> -->
-
+                    <th pSortableColumn="dataCompra">Data de Compra<p-sortIcon field="dataCompra"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="dataVenda">Data de Venda<p-sortIcon field="dataVenda"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="ipvaPago">IPVA Pago<p-sortIcon field="ipvaPago"></p-sortIcon>
+                    </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-car>
                 <tr>
+                    <td>
+                        <div class="form-row">
+                            <button pButton pRipple type="button" icon="pi pi-pencil"
+                                class="p-button-rounded p-button-success p-button-text" style="margin: 0 auto;"
+                                (click)="popularModal(car)"></button>
+                        </div>
+                    </td>
                     <td>{{car.modelo}}</td>
                     <td>{{car.cor}}</td>
                     <td>{{car.ano}}</td>
@@ -70,8 +65,8 @@
                     <td>
                         <div class="form-row">
                             <button pButton pRipple type="button" icon="pi pi-search"
-                                class="p-button-rounded p-button-success p-button-text"
-                                style="margin: 0 auto;" (click)="mostrarDetalheCarro(car.descricao)"></button>
+                                class="p-button-rounded p-button-success p-button-text" style="margin: 0 auto;"
+                                (click)="mostrarDetalheCarro(car.descricao)"></button>
                         </div>
                     </td>
                     <td>{{car.valorComprado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
@@ -193,13 +188,13 @@
             <div class="col">
                 <p-calendar formControlName="txtDataCompra" placeholder="Data de Compra"
                     [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
-                    dateFormat="dd/mm/yy" inputId="spanish" required>
+                    dateFormat="dd/mm/yy" inputId="txtDataCompra" required>
                 </p-calendar>
             </div>
             <div class="col">
                 <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda"
                     [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
-                    dateFormat="dd/mm/yy" inputId="spanish">
+                    dateFormat="dd/mm/yy" inputId="txtDataVenda">
                 </p-calendar>
             </div>
         </div>
@@ -233,7 +228,7 @@
             </div>
             <div class="col">
                 <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
-                <b>  IPVA Pago</b>
+                <b> IPVA Pago</b>
             </div>
         </div>
         <br>
@@ -244,8 +239,8 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <textarea class="form-control" formControlName="txtDetalhe" id="exampleFormControlTextarea1"
-                    rows="3"></textarea>
+                <textarea class="form-control" formControlName="txtDetalhe" placeholder="Detalhes"
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
         <br>

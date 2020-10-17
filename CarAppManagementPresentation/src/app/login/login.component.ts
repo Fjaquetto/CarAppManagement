@@ -14,7 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 
 export class LoginComponent implements OnInit {
-  urlServer: string = "https://localhost:44311/";
+  urlServer: string = "https://webapi.carappmanagement.com/";
   loginForm: FormGroup;
   isLoggedIn: boolean;
   carregarFooterNavbar: boolean = false;

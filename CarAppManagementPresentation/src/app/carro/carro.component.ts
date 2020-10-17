@@ -11,7 +11,7 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './carro.component.html'
 })
 export class CarroComponent implements OnInit {
-  urlServer: string = "https://localhost:44311/";
+  urlServer: string = "https://webapi.carappmanagement.com/";
 
   displayModal: boolean;
   displayDescricao: boolean;

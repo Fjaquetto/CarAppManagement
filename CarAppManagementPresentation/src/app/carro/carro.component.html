@@ -12,7 +12,7 @@
 
         <hr>
 
-        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="500px" [loading]="loading" [paginator]="true"
+        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="450px" [loading]="loading" [paginator]="true"
             [rows]="10" [rowsPerPageOptions]="[10,25,50]"
             [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']">
             <ng-template pTemplate="caption">

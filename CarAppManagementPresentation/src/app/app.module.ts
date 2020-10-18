@@ -32,8 +32,6 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

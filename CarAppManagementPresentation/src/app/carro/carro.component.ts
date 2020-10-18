@@ -58,7 +58,7 @@ export class CarroComponent implements OnInit {
       txtDataCompra: ['', Validators.required],
       txtDataVenda: [''],
       txtDetalhe: ['', Validators.required],
-      ipvaPago: [false, Validators.required],
+      ipvaPago: [false],
     })
 
     this.br = {

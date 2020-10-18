@@ -83,6 +83,9 @@ export class CarroComponent implements OnInit {
 
   adicionarCarro() {
 
+    if (!this.carroForm.controls['ipvaPago'].value)
+      this.carroForm.controls['ipvaPago'].setValue(false);
+
     let carro = {
       id: this.idCarro,
       modelo: this.carroForm.controls['txtModelo'].value,
@@ -98,6 +101,8 @@ export class CarroComponent implements OnInit {
       descricao: this.carroForm.controls['txtDetalhe'].value,
       ipvaPago: this.carroForm.controls['ipvaPago'].value
     }
+
+    console.log(carro);
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

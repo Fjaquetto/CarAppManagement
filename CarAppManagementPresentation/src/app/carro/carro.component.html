@@ -14,7 +14,7 @@
 
         <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="450px" [loading]="loading" [paginator]="true"
             [rows]="10" [rowsPerPageOptions]="[10,25,50]"
-            [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']">
+            [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']" styleClass="p-datatable-responsive-demo">
             <ng-template pTemplate="caption">
                 <div class="table-header form-row">
                     <h5>Lista de Veículos</h5>

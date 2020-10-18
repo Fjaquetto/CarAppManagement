@@ -8,7 +8,8 @@ import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-carro',
-  templateUrl: './carro.component.html'
+  templateUrl: './carro.component.html',
+  styleUrls: ['./carro.component.scss']
 })
 export class CarroComponent implements OnInit {
   urlServer: string = "https://webapi.carappmanagement.com/";
@@ -102,8 +103,6 @@ export class CarroComponent implements OnInit {
       ipvaPago: this.carroForm.controls['ipvaPago'].value
     }
 
-    console.log(carro);
-
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("auth-token")
@@ -160,6 +159,11 @@ export class CarroComponent implements OnInit {
   }
 
   formatarData(date) {
+    debugger;
+
+    if (!date)
+      return null;
+
     if (date !== "") {
       var d = new Date(date),
         month = '' + (d.getMonth() + 1),

@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { MainService } from './services/mainservice';
+import { LoginService } from './services/loginservice';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -63,7 +65,10 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     NgxSpinnerModule
   ],
-  providers: [LoginComponent,
+  providers: [
+    MainService,
+    LoginService,
+    LoginComponent,
     MessageService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService],

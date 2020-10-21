@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { NgxSpinnerService } from "ngx-spinner";
+import { MainService } from '../services/mainservice';
 
 
 
@@ -14,12 +15,12 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 
 export class LoginComponent implements OnInit {
-  urlServer: string = "https://webapi.carappmanagement.com/";
   loginForm: FormGroup;
   isLoggedIn: boolean;
   carregarFooterNavbar: boolean = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private jwt: JwtHelperService, private spinner: NgxSpinnerService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private jwt: JwtHelperService,
+     private spinner: NgxSpinnerService, private mainService: MainService) { }
 
   ngOnInit(): void {
 
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
   logar() {
     this.spinner.show();
 
-    this.http.post(this.urlServer + "api/account/login", this.loginForm.value).subscribe({
+    this.http.post(this.mainService.urlServer + "api/account/login", this.loginForm.value).subscribe({
       next: (data: any) => {
         this.spinner.hide();
         localStorage.setItem("auth-token", data.accessToken)
@@ -56,13 +57,13 @@ export class LoginComponent implements OnInit {
 
     if (localStorage.getItem("auth-token") != null) {
       if (!this.jwt.isTokenExpired(localStorage.getItem("auth-token"))) {
-        if (this.router.url == '/') { 
+        if (this.router.url == '/') {
           this.router.navigate(['home']);
         }
         else {
           this.router.navigate([this.router.url]);
-        }      
-      } 
+        }
+      }
       else {
         localStorage.clear();
         this.router.navigate(['']);

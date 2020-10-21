@@ -5,14 +5,14 @@
     {{descricaoModal}}
 </p-dialog>
 
-<div class="col-sm-9" style="margin: 0 auto; height: 88vh">
-    <p-card header="Veículos" [style]="{height: '88vh'}">
+<div class="col-sm-9" style="margin: 0 auto; height: 100%">
+    <p-card header="Veículos" [style]="{overflow: 'auto', height: '90%'}">
         <button pButton pRipple type="button" label="Adicionar" class="p-button-raised" icon="pi pi-save"
             (click)="showModalDialog()"></button>
 
         <hr>
 
-        <p-table #dt [value]="carros" [scrollable]="true" scrollHeight="450px" [loading]="loading" [paginator]="true"
+        <p-table #dt [value]="carros" autoLayout="true" [scrollable]="false" scrollHeight="485px" [loading]="loading" [paginator]="true"
             [rows]="10" [rowsPerPageOptions]="[10,25,50]"
             [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']" styleClass="p-datatable-responsive-demo">
             <ng-template pTemplate="caption">
@@ -72,9 +72,9 @@
                     <td>{{car.valorComprado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
                     <td>{{car.valorVenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
                     <td>{{car.debitoPendente.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</td>
-                    <td>{{formatarDataTabela(car.dataCompra)}}</td>
-                    <td>{{formatarDataTabela(car.dataVenda)}}</td>
-                    <td>{{formatarBool(car.ipvaPago)}}</td>
+                    <td>{{mainService.formatarDataTabela(car.dataCompra)}}</td>
+                    <td>{{mainService.formatarDataTabela(car.dataVenda)}}</td>
+                    <td>{{mainService.formatarBool(car.ipvaPago)}}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">
@@ -88,8 +88,9 @@
 
     </p-card>
 </div>
+<br>
 
-<p-dialog header="Veículos" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Veículos" [contentStyle]="{'overflow': 'visible'}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
 
     <form class="form-example" [formGroup]="carroForm">
@@ -187,13 +188,13 @@
             </div>
             <div class="col">
                 <p-calendar formControlName="txtDataCompra" placeholder="Data de Compra"
-                    [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
+                    [style]="{ 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
                     dateFormat="dd/mm/yy" inputId="txtDataCompra" required>
                 </p-calendar>
             </div>
             <div class="col">
                 <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda"
-                    [style]="{'position': 'fixed', 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
+                    [style]="{ 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
                     dateFormat="dd/mm/yy" inputId="txtDataVenda">
                 </p-calendar>
             </div>

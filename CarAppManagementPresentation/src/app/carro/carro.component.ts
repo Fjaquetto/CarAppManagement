@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MessageService } from 'primeng/api';
 import { Carros } from '../DTOs/carros';
 import { LoginComponent } from '../login/login.component';
+import { MainService } from '../services/mainservice';
 
 
 @Component({
@@ -12,7 +13,6 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./carro.component.scss']
 })
 export class CarroComponent implements OnInit {
-  urlServer: string = "https://webapi.carappmanagement.com/";
 
   displayModal: boolean;
   displayDescricao: boolean;
@@ -40,7 +40,7 @@ export class CarroComponent implements OnInit {
 
   idCarro: number;
 
-  constructor(private login: LoginComponent, private fb: FormBuilder, private http: HttpClient, private messageService: MessageService) { }
+  constructor(private login: LoginComponent, private fb: FormBuilder, private http: HttpClient, private messageService: MessageService, private mainService: MainService) { }
 
   ngOnInit(): void {
     this.login.verificaUsuarioLogado();
@@ -96,8 +96,8 @@ export class CarroComponent implements OnInit {
       renavam: this.carroForm.controls['txtRenavam'].value,
       valorComprado: this.carroForm.controls['txtValorComprado'].value,
       valorVenda: this.carroForm.controls['txtValorVenda'].value,
-      dataCompra: this.formatarData(this.carroForm.controls['txtDataCompra'].value),
-      dataVenda: this.formatarData(this.carroForm.controls['txtDataVenda'].value),
+      dataCompra: this.mainService.formatarData(this.carroForm.controls['txtDataCompra'].value),
+      dataVenda: this.mainService.formatarData(this.carroForm.controls['txtDataVenda'].value),
       debitoPendente: this.carroForm.controls['txtDebitoPendente'].value,
       descricao: this.carroForm.controls['txtDetalhe'].value,
       ipvaPago: this.carroForm.controls['ipvaPago'].value
@@ -111,7 +111,7 @@ export class CarroComponent implements OnInit {
     let options = { headers: headers };
 
     if (!this.idCarro) {
-      this.http.post(this.urlServer + "api/veiculos", carro, options).subscribe({
+      this.http.post(this.mainService.urlServer + "api/veiculos", carro, options).subscribe({
         next: (data: any) => {
           this.displayModal = false;
           this.obterCarros();
@@ -125,7 +125,7 @@ export class CarroComponent implements OnInit {
       })
     }
     else {
-      this.http.put(this.urlServer + "api/veiculos", carro, options).subscribe({
+      this.http.put(this.mainService.urlServer + "api/veiculos", carro, options).subscribe({
         next: (data: any) => {
           this.displayModal = false;
           this.obterCarros();
@@ -148,7 +148,7 @@ export class CarroComponent implements OnInit {
 
     let options = { headers: headers };
 
-    this.http.get(this.urlServer + "api/veiculos", options)
+    this.http.get(this.mainService.urlServer + "api/veiculos", options)
       .toPromise()
       .then(res => <Carros[]>res)
       .then(carros => {
@@ -158,74 +158,10 @@ export class CarroComponent implements OnInit {
 
   }
 
-  formatarData(date) {
-    debugger;
-
-    if (!date)
-      return null;
-
-    if (date !== "") {
-      var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2)
-        month = '0' + month;
-      if (day.length < 2)
-        day = '0' + day;
-
-      return [year, month, day].join('-');
-    }
-    else {
-      return null;
-    }
-  }
-
-  formatarDataTabela(date) {
-
-    if (!date)
-      return null;
-
-    if (date !== "") {
-      var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2)
-        month = '0' + month;
-      if (day.length < 2)
-        day = '0' + day;
-
-      return [day, month, year].join('/');
-    }
-    else {
-      return null;
-    }
-  }
-
-  formatarBool(data) {
-    if (data == true)
-      return "Sim"
-
-    if (data == false)
-      return "Não"
-  }
-
-  formatarDataModal(data) {
-    if (!data) {
-      return null;
-    }
-    else {
-      return new Date(data);
-    }
-  }
-
-  mostrarDetalheCarro(data) {
-    this.displayDescricao = true;
-    this.descricaoModal = data;
-  }
+  // mostrarDetalheCarro(data) {
+  //   this.displayDescricao = true;
+  //   this.descricaoModal = data;
+  // }
 
   popularModal(data) {
     console.log(data);
@@ -238,8 +174,8 @@ export class CarroComponent implements OnInit {
     this.carroForm.controls['txtValorComprado'].setValue(data.valorComprado);
     this.carroForm.controls['txtDebitoPendente'].setValue(data.debitoPendente);
     this.carroForm.controls['txtValorVenda'].setValue(data.valorVenda);
-    this.carroForm.controls['txtDataCompra'].setValue(this.formatarDataModal(data.dataCompra));
-    this.carroForm.controls['txtDataVenda'].setValue(this.formatarDataModal(data.dataVenda));
+    this.carroForm.controls['txtDataCompra'].setValue(this.mainService.formatarDataModal(data.dataCompra));
+    this.carroForm.controls['txtDataVenda'].setValue(this.mainService.formatarDataModal(data.dataVenda));
     this.carroForm.controls['txtDetalhe'].setValue(data.descricao);
     this.carroForm.controls['ipvaPago'].setValue(data.ipvaPago);
 

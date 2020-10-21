@@ -155,9 +155,8 @@
                 </span>
             </div>
             <div class="col">
-                <p-inputNumber formControlName="txtValorComprado" id="txtValorComprado" mode="currency" currency="BRL"
-                    locale="pt-BR">
-                </p-inputNumber>
+                <input currencyMask formControlName="txtValorComprado" id="txtValorComprado" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText/>
+                
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtValorComprado').errors && (carroForm.get('txtValorComprado').touched || carroForm.get('txtValorComprado').dirty)">
                     <p><b>Preencha o campo "Valor de Compra"</b></p>
@@ -178,9 +177,7 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <p-inputNumber formControlName="txtValorVenda" id="txtValorVenda" value="" mode="currency"
-                    currency="BRL" locale="pt-BR">
-                </p-inputNumber>
+                <input currencyMask formControlName="txtValorVenda" id="txtValorVenda" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtValorVenda').errors && (carroForm.get('txtValorVenda').touched || carroForm.get('txtValorVenda').dirty)">
                     <p><b>Preencha o campo "Valor de Venda"</b></p>
@@ -223,9 +220,7 @@
                 </span>
             </div>
             <div class="col">
-                <p-inputNumber formControlName="txtDebitoPendente" id="txtDebitoPendente" value="" mode="currency"
-                    currency="BRL" locale="pt-BR">
-                </p-inputNumber>
+                <input currencyMask formControlName="txtDebitoPendente" id="txtDebitoPendente" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
             </div>
             <div class="col">
                 <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>

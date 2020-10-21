@@ -158,10 +158,10 @@ export class CarroComponent implements OnInit {
 
   }
 
-  // mostrarDetalheCarro(data) {
-  //   this.displayDescricao = true;
-  //   this.descricaoModal = data;
-  // }
+  mostrarDetalheCarro(data) {
+    this.displayDescricao = true;
+    this.descricaoModal = data;
+  }
 
   popularModal(data) {
     console.log(data);

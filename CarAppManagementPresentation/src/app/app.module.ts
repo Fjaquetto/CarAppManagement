@@ -35,6 +35,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { TableModule } from 'primeng/table';
     TableModule,
     InputTextModule,
     NgxSpinnerModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    
   ],
   providers: [
     MainService,

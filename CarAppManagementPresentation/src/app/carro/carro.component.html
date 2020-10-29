@@ -12,8 +12,8 @@
 
         <hr>
 
-        <p-table #dt [value]="carros" autoLayout="true" [scrollable]="false" scrollHeight="485px" [loading]="loading" [paginator]="true"
-            [rows]="10" [rowsPerPageOptions]="[10,25,50]"
+        <p-table #dt [value]="carros" autoLayout="true" [scrollable]="false" scrollHeight="485px" [loading]="loading"
+            [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
             [globalFilterFields]="['modelo','cor','ano','placa', 'renavam']" styleClass="p-datatable-responsive-demo">
             <ng-template pTemplate="caption">
                 <div class="table-header form-row">
@@ -90,8 +90,14 @@
 </div>
 <br>
 
-<p-dialog header="Veículos" [contentStyle]="{'overflow': 'visible'}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+
+
+<p-dialog header="Veículos" [contentStyle]="{'overflow': 'auto'}" [(visible)]="displayModal" [modal]="true"
     [draggable]="false" [resizable]="false">
+
+    <div>
+
+    </div>
 
     <form class="form-example" [formGroup]="carroForm">
         <div class="form-row">
@@ -155,8 +161,9 @@
                 </span>
             </div>
             <div class="col">
-                <input currencyMask formControlName="txtValorComprado" id="txtValorComprado" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText/>
-                
+                <input currencyMask formControlName="txtValorComprado" id="txtValorComprado"
+                    [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
+
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtValorComprado').errors && (carroForm.get('txtValorComprado').touched || carroForm.get('txtValorComprado').dirty)">
                     <p><b>Preencha o campo "Valor de Compra"</b></p>
@@ -177,22 +184,22 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <input currencyMask formControlName="txtValorVenda" id="txtValorVenda" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
+                <input currencyMask formControlName="txtValorVenda" id="txtValorVenda"
+                    [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
                 <span class="text-danger"
                     *ngIf="carroForm.get('txtValorVenda').errors && (carroForm.get('txtValorVenda').touched || carroForm.get('txtValorVenda').dirty)">
                     <p><b>Preencha o campo "Valor de Venda"</b></p>
                 </span>
             </div>
             <div class="col">
-                <p-calendar formControlName="txtDataCompra" placeholder="Data de Compra"
-                    [style]="{ 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
-                    dateFormat="dd/mm/yy" inputId="txtDataCompra" required>
+                <p-calendar formControlName="txtDataCompra" placeholder="Data de Compra" appendTo="body"
+                    [panelStyle]="{ }" [style]="{ }" [locale]="br" dateFormat="dd/mm/yy" inputId="txtDataCompra"
+                    required>
                 </p-calendar>
             </div>
             <div class="col">
-                <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda"
-                    [style]="{ 'overflow': 'visible', 'z-index': '999'}" [locale]="br"
-                    dateFormat="dd/mm/yy" inputId="txtDataVenda">
+                <p-calendar formControlName="txtDataVenda" placeholder="Data de Venda" [style]="{ }" [locale]="br"
+                    appendTo="body" dateFormat="dd/mm/yy" inputId="txtDataVenda">
                 </p-calendar>
             </div>
         </div>
@@ -220,7 +227,8 @@
                 </span>
             </div>
             <div class="col">
-                <input currencyMask formControlName="txtDebitoPendente" id="txtDebitoPendente" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
+                <input currencyMask formControlName="txtDebitoPendente" id="txtDebitoPendente"
+                    [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
             </div>
             <div class="col">
                 <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>

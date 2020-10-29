@@ -200,4 +200,8 @@ export class CarroComponent implements OnInit {
 
     this.idCarro = 0;
   }
+
+  display() {
+    debugger;
+  }
 } 

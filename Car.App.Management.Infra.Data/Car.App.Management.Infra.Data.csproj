@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200712214454_cascade delete.Designer.cs" />
     <Compile Remove="Migrations\20200727222900_Vendedor.cs" />
     <Compile Remove="Migrations\20200727222900_Vendedor.Designer.cs" />
+    <Compile Remove="Migrations\20201030203539_OnDeleteTest.cs" />
+    <Compile Remove="Migrations\20201030203539_OnDeleteTest.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

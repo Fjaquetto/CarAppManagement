@@ -212,7 +212,7 @@
                 <label for=""><b>Débito Pendente</b></label>
             </div>
             <div class="col">
-                <label for=""><b></b></label>
+                <label for=""><b>Despesas</b></label>
             </div>
         </div>
         <div class="form-row">
@@ -230,6 +230,13 @@
                 <input currencyMask formControlName="txtDebitoPendente" id="txtDebitoPendente"
                     [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
             </div>
+            <div class="col">
+                <input currencyMask formControlName="txtDespesas" id="txtDespesas"
+                    [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',' }" pInputText />
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
             <div class="col">
                 <p-checkbox formControlName="ipvaPago" binary="true" inputId="binary1"></p-checkbox>
                 <b> IPVA Pago</b>

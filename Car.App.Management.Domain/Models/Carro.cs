@@ -19,6 +19,7 @@ namespace Car.App.Management.Domain.Models
         public decimal ValorComprado { get; set; }
         public decimal? ValorVenda { get; set; }
         public decimal? DebitoPendente { get; set; }
+        public decimal? Despesas { get; set; }
         public DateTime DataCompra { get; set; }
         public DateTime? DataVenda { get; set; }
         public bool IpvaPago { get; set; }

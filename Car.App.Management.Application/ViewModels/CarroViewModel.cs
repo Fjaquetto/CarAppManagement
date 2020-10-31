@@ -56,8 +56,11 @@ namespace Car.App.Management.Application.ViewModels
         [DisplayName("Valor de Venda")]
         public decimal? ValorVenda { get; set; }
 
-        [DisplayName("Valor de Venda")]
+        [DisplayName("Débito Pendente")]
         public decimal? DebitoPendente { get; set; }
+
+        [DisplayName("Despesas")]
+        public decimal? Despesas { get; set; }
 
         [Required(ErrorMessage = "É necessário especificar a data de compra do carro.")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]

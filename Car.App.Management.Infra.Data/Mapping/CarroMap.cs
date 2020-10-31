@@ -50,6 +50,9 @@ namespace Car.App.Management.Infra.Data.Mapping
             builder.Property(c => c.DebitoPendente)
                 .HasColumnType("decimal(18,2)");
 
+            builder.Property(c => c.Despesas)
+                .HasColumnType("decimal(18,2)");
+
             builder.Property(c => c.DataCompra)
                 .HasColumnType("datetime")
                 .IsRequired();

@@ -1,6 +1,7 @@
 export class MainService {
     
-  urlServer: string = "https://webapi.carappmanagement.com/";
+  // urlServer: string = "https://webapi.carappmanagement.com/";
+  urlServer: string = "https://localhost:44311/";
 
   formatarData(date) {
     debugger;

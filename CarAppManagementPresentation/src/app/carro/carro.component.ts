@@ -56,6 +56,7 @@ export class CarroComponent implements OnInit {
       txtValorComprado: ['', Validators.required],
       txtValorVenda: [''],
       txtDebitoPendente: [''],
+      txtDespesas: [''],
       txtDataCompra: ['', Validators.required],
       txtDataVenda: [''],
       txtDetalhe: ['', Validators.required],
@@ -99,6 +100,7 @@ export class CarroComponent implements OnInit {
       dataCompra: this.mainService.formatarData(this.carroForm.controls['txtDataCompra'].value),
       dataVenda: this.mainService.formatarData(this.carroForm.controls['txtDataVenda'].value),
       debitoPendente: this.carroForm.controls['txtDebitoPendente'].value,
+      despesas: this.carroForm.controls['txtDespesas'].value,
       descricao: this.carroForm.controls['txtDetalhe'].value,
       ipvaPago: this.carroForm.controls['ipvaPago'].value
     }
@@ -173,6 +175,7 @@ export class CarroComponent implements OnInit {
     this.carroForm.controls['txtRenavam'].setValue(data.renavam);
     this.carroForm.controls['txtValorComprado'].setValue(data.valorComprado);
     this.carroForm.controls['txtDebitoPendente'].setValue(data.debitoPendente);
+    this.carroForm.controls['txtDespesas'].setValue(data.despesas);
     this.carroForm.controls['txtValorVenda'].setValue(data.valorVenda);
     this.carroForm.controls['txtDataCompra'].setValue(this.mainService.formatarDataModal(data.dataCompra));
     this.carroForm.controls['txtDataVenda'].setValue(this.mainService.formatarDataModal(data.dataVenda));
@@ -193,6 +196,7 @@ export class CarroComponent implements OnInit {
     this.carroForm.controls['txtValorComprado'].setValue(0);
     this.carroForm.controls['txtValorVenda'].setValue(0);
     this.carroForm.controls['txtDebitoPendente'].setValue(0);
+    this.carroForm.controls['txtDespesas'].setValue(0);
     this.carroForm.get('txtDataCompra').reset();
     this.carroForm.get('txtDataVenda').reset();
     this.carroForm.get('txtDetalhe').reset();

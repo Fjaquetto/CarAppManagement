@@ -71,7 +71,6 @@ namespace Car.App.Management.Services.Api
             });
 
             app.UseSwaggerSetup();
-
         }
     }
 }

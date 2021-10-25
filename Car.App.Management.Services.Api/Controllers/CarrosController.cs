@@ -4,7 +4,6 @@ using Car.App.Management.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Car.App.Management.Services.Api.Controllers
